@@ -1,6 +1,6 @@
 {
   "name": "@tidemark-security/ux",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "build": "vite build",
     "dev": "vite build --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "prepare": "npm run build",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "typecheck": "tsc -p tsconfig.json --noEmit"
