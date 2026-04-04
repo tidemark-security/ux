@@ -1,0 +1,9 @@
+export { default as interceptLogoWhiteUrl } from "./Intercept-White.svg?url";
+export { default as interceptLogoBlackUrl } from "./Intercept-Black.svg?url";
+export { default as interceptLogoGreenUrl } from "./Intercept-Green.svg?url";
+export { default as tidemarkLogoWhiteUrl } from "./TMS-logo-white.svg?url";
+export { default as tidemarkLogoBlackUrl } from "./TMS-logo-black.svg?url";
+export { default as tidemarkLogoGreenUrl } from "./TMS-logo-green.svg?url";
+export { default as googleLogoUrl } from "./google-logo.svg?url";
+export { default as MSTeamsIcon } from "./MSTeamsIcon";
+export { default as VirusTotalIcon } from "./VirusTotalIcon";

@@ -1,0 +1,290 @@
+@import url("https://fonts.googleapis.com/css2?family=Saira:wght@100;200;300;400;500;600;700;800;900&family=Saira+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Kode+Mono:wght@400;500;600;700&display=swap");
+
+:root {
+  --tm-bg: #0a0a0a;
+  --tm-panel: #171717;
+  --tm-surface: #262626;
+  --tm-surface-alt: #1d1d1d;
+  --tm-border: #414141;
+  --tm-text: #e5e5e5;
+  --tm-muted: #a5a5a5;
+  --tm-primary: #d0ff00;
+  --tm-brand: #d0ff00;
+  --tm-accent: #00ffd9;
+  --tm-shadow: #d0ff00;
+}
+
+:root[data-color-mode="light"] {
+  --tm-bg: #f5f5f5;
+  --tm-panel: #ffffff;
+  --tm-surface: #fafafa;
+  --tm-surface-alt: #f0f0f0;
+  --tm-border: #d4d4d4;
+  --tm-text: #171717;
+  --tm-muted: #525252;
+  --tm-primary: #0a0a0a;
+  --tm-brand: #d0ff00;
+  --tm-accent: #2a1e5c;
+  --tm-shadow: #0a0a0a;
+}
+
+html,
+body,
+#root {
+  background: var(--tm-bg) !important;
+  color: var(--tm-text) !important;
+  font-family: "Saira", sans-serif !important;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "Saira", sans-serif !important;
+}
+
+code,
+pre,
+kbd,
+[id="storybook-explorer-menu"] code {
+  font-family: "Kode Mono", monospace !important;
+}
+
+#storybook-sidebar-region,
+.sidebar-container,
+#storybook-explorer-root,
+#storybook-explorer-menu,
+#storybook-panel-root {
+  background: var(--tm-bg) !important;
+  color: var(--tm-text) !important;
+}
+
+[style*="grid-template-areas"],
+[class*="sidebar"] {
+  border-color: var(--tm-border) !important;
+}
+
+#storybook-sidebar-region {
+  border-right: 1px solid var(--tm-border) !important;
+}
+
+.sidebar-header,
+.sidebar-header > div,
+.sidebar-subheading,
+[role="search"] {
+  background: transparent !important;
+}
+
+.sidebar-header a,
+.sidebar-header button,
+#storybook-explorer-menu a,
+#storybook-explorer-menu button,
+#storybook-panel-root button,
+[role="search"] button {
+  color: var(--tm-text) !important;
+  border-radius: 0 !important;
+}
+
+.sidebar-header a[href="./"][target="_self"] {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.25rem;
+  color: var(--tm-text) !important;
+  text-decoration: none !important;
+  font-family: "Saira Condensed", sans-serif !important;
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.sidebar-header a[href="./"][target="_self"] img {
+  display: none !important;
+}
+
+.sidebar-header a[href="./"][target="_self"]::before {
+  content: "";
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: none;
+  background: center / contain no-repeat url("../src/assets/TMS-logo-green.svg");
+}
+
+.sidebar-header a[href="./"][target="_self"] svg {
+  display: none !important;
+}
+
+.search-field,
+#storybook-explorer-searchfield,
+[role="combobox"] {
+  background: var(--tm-surface) !important;
+  color: var(--tm-text) !important;
+  border-color: var(--tm-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+#storybook-explorer-searchfield::placeholder {
+  color: var(--tm-muted) !important;
+}
+
+.search-field code {
+  color: var(--tm-muted) !important;
+}
+
+#storybook-explorer-tree [data-nodetype="root"] > button {
+  font-family: "Kode Mono", monospace !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--tm-muted) !important;
+}
+
+#storybook-explorer-tree [data-nodetype="component"] > button,
+#storybook-explorer-tree [data-nodetype="document"] > a,
+#storybook-explorer-tree [data-nodetype="story"] > a {
+  background: transparent !important;
+  color: var(--tm-text) !important;
+  border-radius: 0 !important;
+}
+
+#storybook-explorer-tree [data-nodetype="component"] > button:hover,
+#storybook-explorer-tree [data-nodetype="document"] > a:hover,
+#storybook-explorer-tree [data-nodetype="story"] > a:hover,
+#storybook-explorer-tree [data-nodetype="root"] > button:hover {
+  background: var(--tm-surface-alt) !important;
+}
+
+#storybook-explorer-tree .sidebar-item:hover,
+#storybook-explorer-tree .sidebar-item:focus,
+#storybook-explorer-tree .sidebar-item:focus-within {
+  --tree-node-background-hover: var(--tm-accent) !important;
+  background: var(--tm-accent) !important;
+  color: var(--tm-panel) !important;
+}
+
+#storybook-explorer-tree .sidebar-item:hover > a,
+#storybook-explorer-tree .sidebar-item:hover > button,
+#storybook-explorer-tree .sidebar-item:focus > a,
+#storybook-explorer-tree .sidebar-item:focus > button,
+#storybook-explorer-tree .sidebar-item:focus-within > a,
+#storybook-explorer-tree .sidebar-item:focus-within > button {
+  color: var(--tm-panel) !important;
+}
+
+#storybook-explorer-tree .sidebar-item:hover > a:not([data-react-aria-pressable]),
+#storybook-explorer-tree .sidebar-item:hover > button:not([data-react-aria-pressable]),
+#storybook-explorer-tree .sidebar-item:focus > a:not([data-react-aria-pressable]),
+#storybook-explorer-tree .sidebar-item:focus > button:not([data-react-aria-pressable]),
+#storybook-explorer-tree .sidebar-item:focus-within > a:not([data-react-aria-pressable]),
+#storybook-explorer-tree .sidebar-item:focus-within > button:not([data-react-aria-pressable]) {
+  background: var(--tm-accent) !important;
+  color: var(--tm-panel) !important;
+}
+
+#storybook-explorer-tree .sidebar-item:hover > a:not([data-react-aria-pressable]) svg,
+#storybook-explorer-tree .sidebar-item:hover > button:not([data-react-aria-pressable]) svg,
+#storybook-explorer-tree .sidebar-item:focus > a:not([data-react-aria-pressable]) svg,
+#storybook-explorer-tree .sidebar-item:focus > button:not([data-react-aria-pressable]) svg,
+#storybook-explorer-tree .sidebar-item:focus-within > a:not([data-react-aria-pressable]) svg,
+#storybook-explorer-tree .sidebar-item:focus-within > button:not([data-react-aria-pressable]) svg {
+  color: var(--tm-panel) !important;
+}
+
+#storybook-explorer-tree .sidebar-item > button[data-react-aria-pressable] {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--tm-panel) !important;
+}
+
+#storybook-explorer-tree .sidebar-item > button[data-react-aria-pressable] svg {
+  color: var(--tm-panel) !important;
+}
+
+#storybook-explorer-tree .sidebar-item > button[data-react-aria-pressable]:hover,
+#storybook-explorer-tree .sidebar-item > button[data-react-aria-pressable]:focus,
+#storybook-explorer-tree .sidebar-item > button[data-react-aria-pressable]:focus-visible {
+  background: var(--tm-surface-alt) !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
+}
+
+#storybook-explorer-tree .sidebar-item > button[data-react-aria-pressable]:hover svg,
+#storybook-explorer-tree .sidebar-item > button[data-react-aria-pressable]:focus svg,
+#storybook-explorer-tree .sidebar-item > button[data-react-aria-pressable]:focus-visible svg {
+  color: #ffffff !important;
+}
+
+#storybook-explorer-tree [data-selected="true"] > a,
+#storybook-explorer-tree [data-selected="true"] > button {
+  background: var(--tm-primary) !important;
+  color: var(--tm-panel) !important;
+  box-shadow: 4px 4px 0 var(--tm-shadow) !important;
+}
+
+#storybook-explorer-tree svg,
+#storybook-sidebar-region svg,
+#storybook-panel-root svg {
+  color: currentColor !important;
+}
+
+#storybook-panel-root,
+[id*="panel-tab-content"],
+[role="tablist"],
+[role="tabpanel"] {
+  background: var(--tm-bg) !important;
+  color: var(--tm-text) !important;
+  border-color: var(--tm-border) !important;
+}
+
+[role="tab"],
+[role="toolbar"] button,
+.sidebar-header button,
+[role="search"] button,
+#storybook-panel-root button {
+  background: var(--tm-surface) !important;
+  color: var(--tm-text) !important;
+  border: 1px solid var(--tm-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+[role="tab"][aria-selected="true"],
+[role="toolbar"] button[aria-pressed="true"] {
+  background: var(--tm-primary) !important;
+  color: var(--tm-panel) !important;
+  border-color: var(--tm-primary) !important;
+}
+
+[role="tabpanel"] a {
+  color: var(--tm-primary) !important;
+}
+
+.react-aria-Popover[data-trigger="DialogTrigger"] {
+  background: var(--tm-panel) !important;
+  border: 1px solid var(--tm-border) !important;
+  box-shadow: 4px 4px 0 var(--tm-shadow) !important;
+}
+
+.react-aria-Popover[data-trigger="DialogTrigger"] > div:not([style*="clip"]),
+.react-aria-Popover[data-trigger="DialogTrigger"] .sb-list {
+  background: var(--tm-panel) !important;
+}
+
+[id="storybook-explorer-menu"]::-webkit-scrollbar,
+[data-radix-scroll-area-viewport]::-webkit-scrollbar {
+  width: 8px;
+}
+
+[id="storybook-explorer-menu"]::-webkit-scrollbar-thumb,
+[data-radix-scroll-area-viewport]::-webkit-scrollbar-thumb {
+  background: var(--tm-primary);
+}
+
+[id="storybook-explorer-menu"]::-webkit-scrollbar-track,
+[data-radix-scroll-area-viewport]::-webkit-scrollbar-track {
+  background: transparent;
+}

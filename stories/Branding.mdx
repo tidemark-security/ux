@@ -1,0 +1,202 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+import {
+  accent1Scale,
+  accent2Scale,
+  accent3Scale,
+  brandScale,
+  errorScale,
+  successScale,
+  warningScale,
+} from "../src/tokens/colors";
+
+export const colorSections = [
+  { name: "brand", scale: brandScale },
+  { name: "accent-1", scale: accent1Scale },
+  { name: "accent-2", scale: accent2Scale },
+  { name: "accent-3", scale: accent3Scale },
+  { name: "success", scale: successScale },
+  { name: "warning", scale: warningScale },
+  { name: "error", scale: errorScale },
+];
+
+export const semanticTokens = [
+  { name: "default-font", sample: "rgb(var(--color-default-font))" },
+  { name: "subtext-color", sample: "rgb(var(--color-subtext-color))" },
+  { name: "neutral-border", sample: "rgb(var(--color-neutral-border))" },
+  { name: "focus-border", sample: "rgb(var(--color-focus-border))" },
+  { name: "default-background", sample: "rgb(var(--color-default-background))" },
+  { name: "page-background", sample: "rgb(var(--color-page-background))" },
+  { name: "brand-secondary", sample: "rgb(var(--color-brand-secondary))" },
+  { name: "brand-primary", sample: "rgb(208, 255, 0)" },
+  { name: "accent-1-primary", sample: "rgb(0, 255, 217)" },
+  { name: "accent-2-primary", sample: "rgb(255, 0, 85)" },
+  { name: "accent-3-primary", sample: "rgb(42, 30, 92)" },
+];
+
+export const fontSamples = [
+  {
+    label: "Saira",
+    usage: "Body copy, labels, controls",
+    family: '"Saira", sans-serif',
+    sample: "Analyst workflow copy stays compact, readable, and dense.",
+  },
+  {
+    label: "Saira Condensed",
+    usage: "Headings and page titles",
+    family: '"Saira Condensed", sans-serif',
+    sample: "INVESTIGATION WORKSPACE",
+  },
+  {
+    label: "Kode Mono",
+    usage: "Hints, tokens, keyboard affordances",
+    family: '"Kode Mono", monospace',
+    sample: "ALT-2048 :: CTRL+K :: SHA256:7f3a...",
+  },
+];
+
+export const surfaceRules = [
+  "Sharp geometry with selective bevel corners instead of soft rounded UIs.",
+  "Hard, offset shadows for overlays and emphasis instead of blurred elevation.",
+  "Theme switching changes semantic variables, not component APIs.",
+  "Accent colors are reserved for focus, state, and emphasis rather than constant decoration.",
+];
+
+export const geometryRules = [
+  "Default brand surfaces are square, not rounded.",
+  "Bevels are used intentionally, usually on a single corner to create motion and hierarchy.",
+  "Pills are reserved for compact status chips, tags, and token-like affordances rather than primary containers.",
+];
+
+<Meta title="Branding/Overview" />
+
+# Branding
+
+This page is the Storybook starting point for the Tidemark Security UX package. It shows the visual foundations that the component stories build on: palette scales, semantic theme tokens, typography, and surface rules.
+
+## Themes
+
+Use the toolbar theme switcher to preview components against the actual semantic variables. The cards below capture the intended baseline for both modes.
+
+<div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px", marginBottom: "24px" }}>
+  <div className="ux-storybook-panel" style={{ color: "rgb(200, 200, 200)", overflow: "hidden" }}>
+    <div style={{ padding: "16px", borderBottom: "1px solid rgb(65, 65, 65)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <strong>Dark theme</strong>
+      <span style={{ fontFamily: '"Kode Mono", monospace', fontSize: "12px", color: "rgb(208, 255, 0)" }}>default</span>
+    </div>
+    <div style={{ padding: "16px", display: "grid", gap: "12px" }}>
+      <div style={{ border: "1px solid rgb(65, 65, 65)", padding: "12px", background: "rgb(25, 25, 25)" }}>
+        Backgrounds are near-black with high-contrast chartreuse focus treatment.
+      </div>
+      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+        <span className="ux-storybook-chip" style={{ background: "rgb(208, 255, 0)", color: "rgb(10, 10, 10)", borderColor: "rgb(208, 255, 0)" }}>brand-primary</span>
+        <span className="ux-storybook-chip">neutral-border</span>
+      </div>
+    </div>
+  </div>
+
+  <div className="ux-storybook-panel" style={{ background: "rgb(245, 245, 245)", color: "rgb(23, 23, 23)", borderColor: "rgb(212, 212, 212)", boxShadow: "4px 4px 0 rgb(10, 10, 10)", overflow: "hidden" }}>
+    <div style={{ padding: "16px", borderBottom: "1px solid rgb(212, 212, 212)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <strong>Light theme</strong>
+      <span style={{ fontFamily: '"Kode Mono", monospace', fontSize: "12px", color: "rgb(10, 10, 10)" }}>neutral focus</span>
+    </div>
+    <div style={{ padding: "16px", display: "grid", gap: "12px" }}>
+      <div style={{ border: "1px solid rgb(212, 212, 212)", padding: "12px", background: "rgb(255, 255, 255)" }}>
+        Light mode keeps the same geometry and hierarchy while swapping to neutral dark focus outlines.
+      </div>
+      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+        <span className="ux-storybook-chip" style={{ background: "rgb(10, 10, 10)", color: "rgb(255, 255, 255)", borderColor: "rgb(10, 10, 10)" }}>focus-border</span>
+        <span className="ux-storybook-chip" style={{ borderColor: "rgb(212, 212, 212)" }}>neutral-border</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+## Geometry
+
+The product language avoids soft rounding on primary brand surfaces. When a corner treatment is needed, it should usually be a deliberate bevel rather than a fully rounded card.
+
+<div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "16px", marginBottom: "24px" }}>
+  <div className="ux-storybook-panel" style={{ padding: "16px" }}>
+    <div style={{ marginBottom: "12px", fontFamily: '"Kode Mono", monospace', fontSize: "12px", color: "rgb(var(--color-subtext-color))" }}>square surface</div>
+    <div style={{ border: "1px solid rgb(var(--color-neutral-border))", padding: "16px", background: "rgb(var(--color-neutral-50))" }}>
+      Primary panels, docs cards, and layout containers should default to hard corners.
+    </div>
+  </div>
+
+  <div className="ux-storybook-panel bevel-tr-3xl" style={{ padding: "16px" }}>
+    <div style={{ marginBottom: "12px", fontFamily: '"Kode Mono", monospace', fontSize: "12px", color: "rgb(var(--color-subtext-color))" }}>bevelled corner</div>
+    <div className="bevel-tr-3xl" style={{ border: "1px solid rgb(var(--color-neutral-border))", padding: "16px", background: "rgb(var(--color-neutral-50))" }}>
+      Use bevels as an accent for key surfaces that need a little forward motion or hierarchy.
+    </div>
+  </div>
+</div>
+
+<ul>
+  {geometryRules.map((rule) => (
+    <li key={rule}>{rule}</li>
+  ))}
+</ul>
+
+<p><strong>Implementation note:</strong> bevelled Storybook surfaces should use <code>corner-top-right-shape: bevel</code> with the matching border radius token, the same way the product styles do.</p>
+
+## Semantic Tokens
+
+These are the cross-theme variables components should consume first.
+
+<div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: "12px", marginBottom: "24px" }}>
+  {semanticTokens.map((token) => (
+    <div key={token.name} className="ux-storybook-panel ux-storybook-panel-flat bevel-tr-3xl" style={{ overflow: "hidden" }}>
+      <div style={{ height: "64px", background: token.sample }} />
+      <div style={{ padding: "12px" }}>
+        <div style={{ fontFamily: '"Kode Mono", monospace', fontSize: "12px", marginBottom: "4px" }}>{token.name}</div>
+        <div style={{ fontSize: "12px", color: "rgb(var(--color-subtext-color))", wordBreak: "break-word" }}>{token.sample}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+## Palette Scales
+
+Use the full scales for authored surfaces, data states, and storytelling. Reserve semantic tokens for component defaults.
+
+{colorSections.map((section) => (
+  <div key={section.name} style={{ marginBottom: "28px" }}>
+    <h3>{section.name}</h3>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "12px" }}>
+      {Object.entries(section.scale).map(([token, value]) => (
+        <div key={token} className="ux-storybook-panel ux-storybook-panel-flat bevel-tr-3xl" style={{ overflow: "hidden" }}>
+          <div style={{ height: "72px", background: value }} />
+          <div style={{ padding: "12px" }}>
+            <div style={{ fontFamily: '"Kode Mono", monospace', fontSize: "12px", marginBottom: "4px" }}>{section.name}.{token}</div>
+            <div style={{ fontSize: "12px", color: "rgb(var(--color-subtext-color))", wordBreak: "break-word" }}>{value}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+))}
+
+## Typography
+
+<div style={{ display: "grid", gap: "12px", marginBottom: "24px" }}>
+  {fontSamples.map((font) => (
+    <div key={font.label} className={font.label === "Saira Condensed" ? "ux-storybook-panel" : "ux-storybook-panel"} style={{ padding: "16px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", gap: "12px", alignItems: "baseline", flexWrap: "wrap", marginBottom: "10px" }}>
+        <strong>{font.label}</strong>
+        <span style={{ fontFamily: '"Kode Mono", monospace', fontSize: "12px", color: "rgb(var(--color-subtext-color))" }}>{font.usage}</span>
+      </div>
+      <div style={{ fontFamily: font.family, fontSize: font.label === "Saira Condensed" ? "32px" : font.label === "Kode Mono" ? "14px" : "16px", lineHeight: 1.35 }}>
+        {font.sample}
+      </div>
+    </div>
+  ))}
+</div>
+
+## Surface Rules
+
+<ul>
+  {surfaceRules.map((rule) => (
+    <li key={rule}>{rule}</li>
+  ))}
+</ul>
