@@ -1,12 +1,17 @@
 export { AssigneeSelector } from "./AssigneeSelector";
 export { Calendar } from "./Calendar";
+export type { CalendarProps } from "./Calendar";
 export { DateRangePicker } from "./DateRangePicker";
+export type { DateRangeValue, DateRangePickerProps } from "./DateRangePicker";
 export { DateTimeManager } from "./DateTimeManager";
+export type { DateTimeManagerProps } from "./DateTimeManager";
 export { RadioGroup } from "./RadioGroup";
 export { Select } from "./Select";
+export type { SelectProps } from "./Select";
 export { Slider } from "./Slider";
 export { Switch } from "./Switch";
 export { TagInput } from "./TagInput";
 export { TagsManager } from "./TagsManager";
+export type { TagsManagerProps } from "./TagsManager";
 export { TextArea } from "./TextArea";
 export { TextField } from "./TextField";

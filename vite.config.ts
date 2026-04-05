@@ -21,7 +21,7 @@ export default defineConfig({
       fileName: format => format === "es" ? "index.js" : "index.cjs"
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react-router-dom"],
+      external: ["react", "react-dom", "react-router-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],
       output: {
         globals: {
           react: "React",

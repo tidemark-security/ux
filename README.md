@@ -20,4 +20,34 @@ Prereleases publish with a dist-tag derived from the prerelease identifier, such
 
 ## Consuming the package
 
-Consumers need access to GitHub Packages and an `.npmrc` entry for `@tidemark-security` pointing at `https://npm.pkg.github.com`.
+Install from GitHub Packages (requires `.npmrc` with `@tidemark-security` pointing at `https://npm.pkg.github.com`):
+
+```bash
+npm install @tidemark-security/ux
+```
+
+Or install directly from the Git repository (no registry access needed):
+
+```bash
+npm install git+https://github.com/tidemark-security/ux.git#v0.1.2
+```
+
+### Tailwind CSS configuration
+
+This library ships a pre-built bundle that contains Tailwind utility classes (including arbitrary-value classes like `z-[var(--z-modal)]`). Tailwind's JIT compiler in the consuming app won't see these classes unless you tell it to scan the bundle.
+
+Add the UX dist file to your `tailwind.config.js` content array:
+
+```js
+// tailwind.config.js
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@tidemark-security/ux/dist/index.js",
+  ],
+  // ...
+};
+```
+
+Without this, any Tailwind classes used only inside UX components (and not elsewhere in your app) will be missing from the generated CSS. This typically manifests as invisible overlays, missing z-index layering, or broken layouts.

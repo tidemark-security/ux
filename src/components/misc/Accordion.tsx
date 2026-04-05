@@ -31,7 +31,15 @@ const Content = React.forwardRef<HTMLDivElement, ContentProps>(function Content(
   ref,
 ) {
   return children ? (
-    <RadixCollapsible.Content className={cn("flex w-full flex-col items-start gap-2 overflow-hidden", className)} ref={ref} {...otherProps}>
+    <RadixCollapsible.Content
+      className={cn(
+        "flex w-full flex-col items-start gap-2 overflow-hidden",
+        "data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up",
+        className,
+      )}
+      ref={ref}
+      {...otherProps}
+    >
       {children}
     </RadixCollapsible.Content>
   ) : null;
