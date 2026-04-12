@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import type { Preview } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
 
+import "./tailwind.css";
 import "./storybook.css";
 import "../src/tokens/index.css";
 
