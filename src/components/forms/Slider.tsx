@@ -40,7 +40,7 @@ const Thumb = React.forwardRef<HTMLSpanElement, ThumbProps>(function Thumb(
   return (
     <RadixSlider.Thumb
       className={cn(
-        "block h-5 w-2.5 rounded-custom5",
+        "block h-5 w-2.5 bevel-tr-sm bevel-br-sm bevel-tl-sm bevel-bl-sm",
         isDarkTheme ? "bg-brand-primary" : "bg-neutral-1000",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
         isDarkTheme ? "focus-visible:ring-brand-500" : "focus-visible:ring-neutral-1000",

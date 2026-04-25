@@ -3,6 +3,10 @@ body {
   color: rgb(var(--color-default-font));
 }
 
+body.sb-show-main {
+  background: rgb(var(--color-default-background)) !important;
+}
+
 :root {
   --ux-storybook-link-color: rgb(var(--color-focus-border));
   --ux-storybook-link-hover-color: rgb(var(--color-default-font));
@@ -18,6 +22,108 @@ body {
 #storybook-explorer-menu code,
 #storybook-panel-root code {
   font-family: "Kode Mono", monospace;
+}
+
+.ux-storybook-theme-card {
+  overflow: hidden;
+}
+
+.ux-storybook-theme-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.ux-storybook-theme-card-kicker {
+  font-family: "Kode Mono", monospace;
+  font-size: 0.75rem;
+}
+
+.ux-storybook-theme-card-surface {
+  padding: 0.75rem;
+}
+
+.ux-storybook-theme-card-surface p {
+  margin: 0 !important;
+}
+
+.ux-storybook-theme-card-dark {
+  background: rgb(10, 10, 10) !important;
+  border-color: rgb(65, 65, 65) !important;
+  box-shadow: 4px 4px 0 rgb(208, 255, 0) !important;
+  color: rgb(200, 200, 200) !important;
+  -webkit-text-fill-color: rgb(200, 200, 200) !important;
+}
+
+.ux-storybook-theme-card-dark :where(strong, p, div, span:not(.ux-storybook-theme-chip-primary)) {
+  color: rgb(200, 200, 200) !important;
+  -webkit-text-fill-color: rgb(200, 200, 200) !important;
+}
+
+.ux-storybook-theme-card-dark .ux-storybook-theme-card-header {
+  border-bottom: 1px solid rgb(65, 65, 65);
+}
+
+.ux-storybook-theme-card-dark .ux-storybook-theme-card-kicker {
+  color: rgb(208, 255, 0) !important;
+  -webkit-text-fill-color: rgb(208, 255, 0) !important;
+}
+
+.ux-storybook-theme-card-dark .ux-storybook-theme-card-surface {
+  background: rgb(25, 25, 25);
+  border: 1px solid rgb(65, 65, 65);
+}
+
+.ux-storybook-theme-card-dark .ux-storybook-theme-chip-primary {
+  background: rgb(208, 255, 0) !important;
+  border-color: rgb(208, 255, 0) !important;
+  color: rgb(10, 10, 10) !important;
+  -webkit-text-fill-color: rgb(10, 10, 10) !important;
+}
+
+.ux-storybook-theme-card-dark .ux-storybook-theme-chip-border {
+  background: transparent !important;
+  border-color: rgb(65, 65, 65) !important;
+}
+
+.ux-storybook-theme-card-light {
+  background: rgb(245, 245, 245) !important;
+  border-color: rgb(212, 212, 212) !important;
+  box-shadow: 4px 4px 0 rgb(10, 10, 10) !important;
+  color: rgb(23, 23, 23) !important;
+  -webkit-text-fill-color: rgb(23, 23, 23) !important;
+}
+
+.ux-storybook-theme-card-light :where(strong, p, div, span:not(.ux-storybook-theme-chip-primary)) {
+  color: rgb(23, 23, 23) !important;
+  -webkit-text-fill-color: rgb(23, 23, 23) !important;
+}
+
+.ux-storybook-theme-card-light .ux-storybook-theme-card-header {
+  border-bottom: 1px solid rgb(212, 212, 212);
+}
+
+.ux-storybook-theme-card-light .ux-storybook-theme-card-kicker {
+  color: rgb(10, 10, 10) !important;
+  -webkit-text-fill-color: rgb(10, 10, 10) !important;
+}
+
+.ux-storybook-theme-card-light .ux-storybook-theme-card-surface {
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(212, 212, 212);
+}
+
+.ux-storybook-theme-card-light .ux-storybook-theme-chip-primary {
+  background: rgb(10, 10, 10) !important;
+  border-color: rgb(10, 10, 10) !important;
+  color: rgb(255, 255, 255) !important;
+  -webkit-text-fill-color: rgb(255, 255, 255) !important;
+}
+
+.ux-storybook-theme-card-light .ux-storybook-theme-chip-border {
+  background: transparent !important;
+  border-color: rgb(212, 212, 212) !important;
 }
 
 #storybook-docs,
@@ -105,6 +211,10 @@ body {
   background: rgb(var(--color-default-background)) !important;
 }
 
+#storybook-docs .sbdocs .sbdocs-preview .docs-story {
+  background: rgb(var(--color-default-background)) !important;
+}
+
 .sbdocs .docblock-source,
 .sbdocs .docblock-source pre {
   background: rgb(var(--color-neutral-50)) !important;
@@ -120,14 +230,41 @@ body {
   background: rgb(var(--color-default-background)) !important;
 }
 
+.sbdocs .docblock-argstable-head tr,
+.sbdocs .docblock-argstable-head th,
+.sbdocs .docblock-argstable-body tr,
+.sbdocs .docblock-argstable-body td {
+  background: rgb(var(--color-default-background)) !important;
+  background-color: rgb(var(--color-default-background)) !important;
+  color: rgb(var(--color-default-font)) !important;
+  -webkit-text-fill-color: rgb(var(--color-default-font)) !important;
+}
+
 .sbdocs .docblock-argstable th,
 .sbdocs .docblock-argstable td {
   border-color: rgb(var(--color-neutral-border)) !important;
 }
 
+/* Type badges and inline code within argstable cells */
+.sbdocs .docblock-argstable-head th span,
+.sbdocs .docblock-argstable-body td span,
+.sbdocs .docblock-argstable-body td div,
+.sbdocs .docblock-argstable-body td code,
+.sbdocs .docblock-argstable-body td button {
+  color: rgb(var(--color-default-font)) !important;
+  -webkit-text-fill-color: rgb(var(--color-default-font)) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
 .sbdocs .docblock-code-toggle > button {
   background: rgb(var(--color-neutral-100)) !important;
   color: rgb(var(--color-default-font)) !important;
+}
+
+:root[data-theme="light"] .sbdocs .sbdocs-preview [role="toolbar"] a[aria-label="Open canvas in new tab"] {
+  color: rgb(var(--color-neutral-0)) !important;
+  -webkit-text-fill-color: rgb(var(--color-neutral-0)) !important;
 }
 
 .sbdocs .css-wzniqs,
@@ -183,6 +320,38 @@ body {
 
 .ux-storybook-panel-flat {
   box-shadow: none;
+}
+
+.sbdocs .ux-storybook-theme-card-dark,
+.sbdocs .ux-storybook-theme-card-dark :where(strong, p, div, span:not(.ux-storybook-theme-chip-primary)) {
+  color: rgb(200, 200, 200) !important;
+  -webkit-text-fill-color: rgb(200, 200, 200) !important;
+}
+
+.sbdocs .ux-storybook-theme-card-dark .ux-storybook-theme-card-kicker {
+  color: rgb(208, 255, 0) !important;
+  -webkit-text-fill-color: rgb(208, 255, 0) !important;
+}
+
+.sbdocs .ux-storybook-theme-card-dark .ux-storybook-theme-chip-primary {
+  color: rgb(10, 10, 10) !important;
+  -webkit-text-fill-color: rgb(10, 10, 10) !important;
+}
+
+.sbdocs .ux-storybook-theme-card-light,
+.sbdocs .ux-storybook-theme-card-light :where(strong, p, div, span:not(.ux-storybook-theme-chip-primary)) {
+  color: rgb(23, 23, 23) !important;
+  -webkit-text-fill-color: rgb(23, 23, 23) !important;
+}
+
+.sbdocs .ux-storybook-theme-card-light .ux-storybook-theme-card-kicker {
+  color: rgb(10, 10, 10) !important;
+  -webkit-text-fill-color: rgb(10, 10, 10) !important;
+}
+
+.sbdocs .ux-storybook-theme-card-light .ux-storybook-theme-chip-primary {
+  color: rgb(255, 255, 255) !important;
+  -webkit-text-fill-color: rgb(255, 255, 255) !important;
 }
 
 

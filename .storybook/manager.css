@@ -24,7 +24,7 @@
   --tm-muted: #525252;
   --tm-primary: #0a0a0a;
   --tm-brand: #d0ff00;
-  --tm-accent: #2a1e5c;
+  --tm-accent: #171717;
   --tm-shadow: #0a0a0a;
 }
 
@@ -113,6 +113,10 @@ kbd,
   background: center / contain no-repeat url("../src/assets/TMS-logo-green.svg");
 }
 
+:root[data-color-mode="light"] .sidebar-header a[href="./"][target="_self"]::before {
+  background-image: url("../src/assets/TMS-logo-black.svg");
+}
+
 .sidebar-header a[href="./"][target="_self"] svg {
   display: none !important;
 }
@@ -148,6 +152,12 @@ kbd,
 #storybook-explorer-tree [data-nodetype="story"] > a {
   background: transparent !important;
   color: var(--tm-text) !important;
+  border-radius: 0 !important;
+}
+
+#storybook-explorer-tree .sidebar-item,
+#storybook-explorer-tree .sidebar-item > a,
+#storybook-explorer-tree .sidebar-item > button {
   border-radius: 0 !important;
 }
 

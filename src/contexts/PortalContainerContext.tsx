@@ -33,8 +33,8 @@ export function usePortalContainer(): HTMLElement | null {
   return container;
 }
 
-export function usePortalContainerRef(): RefObject<HTMLDivElement> {
-  return useRef<HTMLDivElement>(null);
+export function usePortalContainerRef(): RefObject<HTMLDivElement | null> {
+  return useRef<HTMLDivElement | null>(null);
 }
 
 export { PortalContainerContext };

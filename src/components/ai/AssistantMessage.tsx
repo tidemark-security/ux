@@ -8,6 +8,7 @@ import { IconButton } from "../buttons/IconButton";
 import { MarkdownContent } from "../data-display/MarkdownContent";
 import { RelativeTime } from "../data-display/RelativeTime";
 import { Tooltip } from "../overlays/Tooltip";
+import { AiLoadingScanline } from "./AiLoadingScanline";
 import { ToolApprovalCard } from "./ToolApprovalCard";
 import type { AssistantMessageProps } from "./types";
 
@@ -45,9 +46,7 @@ function AssistantMessageComponent({
                 <div className="flex items-center gap-2 text-caption font-caption text-subtext-color">
                   <span>Generating response</span>
                 </div>
-                <div className="ai-scanline-track">
-                  <span className={`ai-scanline ${isDarkTheme ? "bg-brand-primary" : "bg-default-font"}`} />
-                </div>
+                <AiLoadingScanline />
               </div>
             ) : null}
           </div>

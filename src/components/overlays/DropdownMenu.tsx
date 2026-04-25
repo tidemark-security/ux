@@ -39,7 +39,7 @@ export const DropdownMenuContent = React.forwardRef<HTMLDivElement, DropdownMenu
       <RadixDropdownMenu.Portal container={portalContainer}>
         <RadixDropdownMenu.Content
           className={cn(
-            "z-[var(--z-popover)] flex min-w-[192px] flex-col items-start rounded-md border border-solid border-neutral-border bg-default-background px-1 py-1 shadow-lg",
+            "z-[var(--z-popover)] flex min-w-[192px] flex-col items-start rounded-md border border-solid border-neutral-200 bg-neutral-50 px-1 py-1 shadow-neutral-200-shadow-medium",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
@@ -166,7 +166,7 @@ const DropdownMenuRootStyled = React.forwardRef<HTMLDivElement, DropdownMenuRoot
     return children ? (
       <div
         className={cn(
-          "z-[var(--z-popover)] flex min-w-[192px] flex-col items-start rounded-md border border-solid border-neutral-border bg-default-background px-1 py-1 shadow-lg",
+          "z-[var(--z-popover)] flex min-w-[192px] flex-col items-start rounded-md border border-solid border-neutral-200 bg-neutral-50 px-1 py-1 shadow-neutral-200-shadow-medium",
           className,
         )}
         ref={ref}

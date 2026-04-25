@@ -1,4 +1,4 @@
-import { GLOBALS_UPDATED } from "storybook/internal/core-events";
+import { GLOBALS_UPDATED, SET_GLOBALS, UPDATE_GLOBALS } from "storybook/internal/core-events";
 import { addons } from "storybook/manager-api";
 
 import "./manager.css";
@@ -45,10 +45,19 @@ function applyManagerTheme(theme?: string) {
 
 applyManagerTheme(readThemeFromUrl());
 
-const channel = addons.getChannel();
-
-channel.on(GLOBALS_UPDATED, ({ globals }) => {
+function handleGlobalsChange({ globals }: { globals?: { theme?: string } }) {
   applyManagerTheme(globals?.theme);
+}
+
+addons.register("tidemark/theme-sync", (api) => {
+  const applyCurrentGlobals = () => {
+    applyManagerTheme(api.getGlobals()?.theme as string | undefined);
+  };
+
+  api.on(UPDATE_GLOBALS, handleGlobalsChange);
+  api.on(GLOBALS_UPDATED, handleGlobalsChange);
+  api.on(SET_GLOBALS, handleGlobalsChange);
+  applyCurrentGlobals();
 });
 
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {

@@ -86,7 +86,7 @@ const Content = React.forwardRef<HTMLDivElement, ContentProps>(function Content(
     <RadixSelect.Portal container={portalContainer}>
       <RadixSelect.Content
         className={cn(
-          "flex w-[var(--radix-select-trigger-width)] flex-col items-start overflow-hidden rounded-md border border-solid border-neutral-border bg-default-background px-1 py-1 shadow-lg",
+          "flex w-[var(--radix-select-trigger-width)] flex-col items-start overflow-hidden rounded-md border border-solid border-neutral-200 bg-neutral-50 px-1 py-1 shadow-neutral-200-shadow-medium",
           "z-[var(--z-popover)]",
           "data-[state=open]:animate-in data-[state=closed]:animate-out",
           "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",

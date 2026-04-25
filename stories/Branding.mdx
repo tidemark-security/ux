@@ -1,4 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks";
+import { useEffect, useRef, useState } from "react";
 
 import {
   accent1Scale,
@@ -20,19 +21,146 @@ export const colorSections = [
   { name: "error", scale: errorScale },
 ];
 
+export const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 export const semanticTokens = [
-  { name: "default-font", sample: "rgb(var(--color-default-font))" },
-  { name: "subtext-color", sample: "rgb(var(--color-subtext-color))" },
-  { name: "neutral-border", sample: "rgb(var(--color-neutral-border))" },
-  { name: "focus-border", sample: "rgb(var(--color-focus-border))" },
-  { name: "default-background", sample: "rgb(var(--color-default-background))" },
-  { name: "page-background", sample: "rgb(var(--color-page-background))" },
-  { name: "brand-secondary", sample: "rgb(var(--color-brand-secondary))" },
-  { name: "brand-primary", sample: "rgb(208, 255, 0)" },
-  { name: "accent-1-primary", sample: "rgb(0, 255, 217)" },
-  { name: "accent-2-primary", sample: "rgb(255, 0, 85)" },
-  { name: "accent-3-primary", sample: "rgb(42, 30, 92)" },
+  { className: "default-font", sample: "rgb(var(--color-default-font))" },
+  { className: "subtext-color", sample: "rgb(var(--color-subtext-color))" },
+  { className: "neutral-border", sample: "rgb(var(--color-neutral-border))" },
+  { className: "focus-border", sample: "rgb(var(--color-focus-border))" },
+  { className: "default-background", sample: "rgb(var(--color-default-background))" },
+  { className: "page-background", sample: "rgb(var(--color-page-background))" },
+  { className: "brand-secondary", sample: "rgb(var(--color-brand-secondary))" },
+  { className: "brand-primary", sample: "rgb(208, 255, 0)" },
+  { className: "accent-1-primary", sample: "rgb(0, 255, 217)" },
+  { className: "accent-2-primary", sample: "rgb(255, 0, 85)" },
+  { className: "accent-3-primary", sample: "rgb(42, 30, 92)" },
 ];
+
+export const parseColorChannels = (color) => {
+  const match = color.match(/rgba?\(([^)]+)\)/);
+
+  if (!match) {
+    return null;
+  }
+
+  const channels = match[1]
+    .split(",")
+    .map((channel) => Number(channel.trim().replace("/", "")));
+
+  if (channels.length < 3 || channels.slice(0, 3).some((channel) => Number.isNaN(channel))) {
+    return null;
+  }
+
+  return {
+    red: Math.round(channels[0]),
+    green: Math.round(channels[1]),
+    blue: Math.round(channels[2]),
+    alpha: Number.isNaN(channels[3]) || channels[3] === undefined ? 1 : channels[3],
+  };
+};
+
+export const colorToHex = (color) => {
+  const channels = parseColorChannels(color);
+
+  if (!channels) {
+    return "";
+  }
+
+  const toHex = (channel) => Math.max(0, Math.min(255, channel)).toString(16).padStart(2, "0");
+  const alphaHex = channels.alpha < 1 ? toHex(Math.round(channels.alpha * 255)) : "";
+
+  return `#${toHex(channels.red)}${toHex(channels.green)}${toHex(channels.blue)}${alphaHex}`;
+};
+
+export const normalizeRgb = (color) => {
+  const channels = parseColorChannels(color);
+
+  if (!channels) {
+    return color;
+  }
+
+  if (channels.alpha < 1) {
+    return `rgba(${channels.red}, ${channels.green}, ${channels.blue}, ${Number(channels.alpha.toFixed(3))})`;
+  }
+
+  return `rgb(${channels.red}, ${channels.green}, ${channels.blue})`;
+};
+
+export function CopyValue({ value }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    if (!value) {
+      return;
+    }
+
+    await navigator.clipboard.writeText(value);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 900);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      title={`Copy ${value}`}
+      style={{
+        display: "block",
+        width: "100%",
+        padding: "2px 0",
+        color: copied ? "rgb(var(--color-focus-border))" : "rgb(var(--color-subtext-color))",
+        fontFamily: '"Kode Mono", monospace',
+        fontSize: "12px",
+        lineHeight: "18px",
+        textAlign: "left",
+        wordBreak: "break-word",
+        background: "transparent",
+        border: 0,
+        cursor: "copy",
+      }}
+    >
+      {value}
+    </button>
+  );
+}
+
+export function ColorSwatch({ className, sample }) {
+  const sampleRef = useRef(null);
+  const [computedColor, setComputedColor] = useState(sample);
+
+  useEffect(() => {
+    const updateColor = () => {
+      if (!sampleRef.current) {
+        return;
+      }
+
+      setComputedColor(normalizeRgb(window.getComputedStyle(sampleRef.current).backgroundColor));
+    };
+
+    updateColor();
+
+    const observer = new MutationObserver(updateColor);
+    observer.observe(document.documentElement, { attributes: true });
+    observer.observe(document.body, { attributes: true });
+
+    return () => observer.disconnect();
+  }, [sample]);
+
+  const rgbValue = normalizeRgb(computedColor);
+  const hexValue = colorToHex(rgbValue);
+
+  return (
+    <div className="ux-storybook-panel ux-storybook-panel-flat bevel-tr-3xl" style={{ overflow: "hidden" }}>
+      <div ref={sampleRef} style={{ height: "72px", background: sample }} />
+      <div style={{ padding: "12px" }}>
+        <CopyValue value={className} />
+        <CopyValue value={hexValue} />
+        <CopyValue value={rgbValue} />
+      </div>
+    </div>
+  );
+}
 
 export const fontSamples = [
   {
@@ -65,7 +193,7 @@ export const surfaceRules = [
 export const geometryRules = [
   "Default brand surfaces are square, not rounded.",
   "Bevels are used intentionally, usually on a single corner to create motion and hierarchy.",
-  "Pills are reserved for compact status chips, tags, and token-like affordances rather than primary containers.",
+  "Status chips, tags, and token-like affordances use sharp corners or a subtle bevel — never pills or rounded corners.",
 ];
 
 <Meta title="Branding/Overview" />
@@ -76,37 +204,37 @@ This page is the Storybook starting point for the Tidemark Security UX package. 
 
 ## Themes
 
-Use the toolbar theme switcher to preview components against the actual semantic variables. The cards below capture the intended baseline for both modes.
+Use the toolbar theme switcher to preview components against the actual semantic variables. The cards below stay fixed so the dark and light baselines can be compared side by side.
 
 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px", marginBottom: "24px" }}>
-  <div className="ux-storybook-panel" style={{ color: "rgb(200, 200, 200)", overflow: "hidden" }}>
-    <div style={{ padding: "16px", borderBottom: "1px solid rgb(65, 65, 65)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+  <div className="ux-storybook-panel ux-storybook-theme-card ux-storybook-theme-card-dark">
+    <div className="ux-storybook-theme-card-header">
       <strong>Dark theme</strong>
-      <span style={{ fontFamily: '"Kode Mono", monospace', fontSize: "12px", color: "rgb(208, 255, 0)" }}>default</span>
+      <span className="ux-storybook-theme-card-kicker">default</span>
     </div>
     <div style={{ padding: "16px", display: "grid", gap: "12px" }}>
-      <div style={{ border: "1px solid rgb(65, 65, 65)", padding: "12px", background: "rgb(25, 25, 25)" }}>
-        Backgrounds are near-black with high-contrast chartreuse focus treatment.
+      <div className="ux-storybook-theme-card-surface">
+        <p>Backgrounds are near-black with high-contrast chartreuse focus treatment.</p>
       </div>
       <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-        <span className="ux-storybook-chip" style={{ background: "rgb(208, 255, 0)", color: "rgb(10, 10, 10)", borderColor: "rgb(208, 255, 0)" }}>brand-primary</span>
-        <span className="ux-storybook-chip">neutral-border</span>
+        <span className="ux-storybook-chip ux-storybook-theme-chip-primary">brand-primary</span>
+        <span className="ux-storybook-chip ux-storybook-theme-chip-border">neutral-border</span>
       </div>
     </div>
   </div>
 
-  <div className="ux-storybook-panel" style={{ background: "rgb(245, 245, 245)", color: "rgb(23, 23, 23)", borderColor: "rgb(212, 212, 212)", boxShadow: "4px 4px 0 rgb(10, 10, 10)", overflow: "hidden" }}>
-    <div style={{ padding: "16px", borderBottom: "1px solid rgb(212, 212, 212)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+  <div className="ux-storybook-panel ux-storybook-theme-card ux-storybook-theme-card-light">
+    <div className="ux-storybook-theme-card-header">
       <strong>Light theme</strong>
-      <span style={{ fontFamily: '"Kode Mono", monospace', fontSize: "12px", color: "rgb(10, 10, 10)" }}>neutral focus</span>
+      <span className="ux-storybook-theme-card-kicker">neutral focus</span>
     </div>
     <div style={{ padding: "16px", display: "grid", gap: "12px" }}>
-      <div style={{ border: "1px solid rgb(212, 212, 212)", padding: "12px", background: "rgb(255, 255, 255)" }}>
-        Light mode keeps the same geometry and hierarchy while swapping to neutral dark focus outlines.
+      <div className="ux-storybook-theme-card-surface">
+        <p>Light mode keeps the same geometry and hierarchy while swapping to neutral dark focus outlines.</p>
       </div>
       <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-        <span className="ux-storybook-chip" style={{ background: "rgb(10, 10, 10)", color: "rgb(255, 255, 255)", borderColor: "rgb(10, 10, 10)" }}>focus-border</span>
-        <span className="ux-storybook-chip" style={{ borderColor: "rgb(212, 212, 212)" }}>neutral-border</span>
+        <span className="ux-storybook-chip ux-storybook-theme-chip-primary">focus-border</span>
+        <span className="ux-storybook-chip ux-storybook-theme-chip-border">neutral-border</span>
       </div>
     </div>
   </div>
@@ -146,13 +274,7 @@ These are the cross-theme variables components should consume first.
 
 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: "12px", marginBottom: "24px" }}>
   {semanticTokens.map((token) => (
-    <div key={token.name} className="ux-storybook-panel ux-storybook-panel-flat bevel-tr-3xl" style={{ overflow: "hidden" }}>
-      <div style={{ height: "64px", background: token.sample }} />
-      <div style={{ padding: "12px" }}>
-        <div style={{ fontFamily: '"Kode Mono", monospace', fontSize: "12px", marginBottom: "4px" }}>{token.name}</div>
-        <div style={{ fontSize: "12px", color: "rgb(var(--color-subtext-color))", wordBreak: "break-word" }}>{token.sample}</div>
-      </div>
-    </div>
+    <ColorSwatch key={token.className} className={token.className} sample={token.sample} />
   ))}
 </div>
 
@@ -162,16 +284,10 @@ Use the full scales for authored surfaces, data states, and storytelling. Reserv
 
 {colorSections.map((section) => (
   <div key={section.name} style={{ marginBottom: "28px" }}>
-    <h3>{section.name}</h3>
+    <h3 id={slugify(section.name)}>{section.name}</h3>
     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "12px" }}>
       {Object.entries(section.scale).map(([token, value]) => (
-        <div key={token} className="ux-storybook-panel ux-storybook-panel-flat bevel-tr-3xl" style={{ overflow: "hidden" }}>
-          <div style={{ height: "72px", background: value }} />
-          <div style={{ padding: "12px" }}>
-            <div style={{ fontFamily: '"Kode Mono", monospace', fontSize: "12px", marginBottom: "4px" }}>{section.name}.{token}</div>
-            <div style={{ fontSize: "12px", color: "rgb(var(--color-subtext-color))", wordBreak: "break-word" }}>{value}</div>
-          </div>
-        </div>
+        <ColorSwatch key={token} className={`${section.name}-${token}`} sample={value} />
       ))}
     </div>
   </div>

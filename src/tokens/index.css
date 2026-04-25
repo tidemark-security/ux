@@ -116,6 +116,78 @@ body {
   color: rgb(var(--color-default-font));
 }
 
+.shadow-neutral-200-shadow-small {
+  box-shadow: 2px 2px 0 0 rgb(var(--color-neutral-200));
+}
+
+.shadow-neutral-200-shadow-medium {
+  box-shadow: 3px 3px 0 0 rgb(var(--color-neutral-200));
+}
+
+.shadow-neutral-200-shadow-large {
+  box-shadow: 5px 5px 0 0 rgb(var(--color-neutral-200));
+}
+
+.shadow-success-100-shadow-small {
+  box-shadow: 2px 2px 0 0 rgb(251, 255, 214);
+}
+
+.shadow-success-100-shadow-medium {
+  box-shadow: 3px 3px 0 0 rgb(251, 255, 214);
+}
+
+.shadow-success-100-shadow-large {
+  box-shadow: 5px 5px 0 0 rgb(251, 255, 214);
+}
+
+.shadow-success-shadow-small {
+  box-shadow: 2px 2px 0 0 rgb(208, 255, 0);
+}
+
+.shadow-success-shadow-medium {
+  box-shadow: 3px 3px 0 0 rgb(208, 255, 0);
+}
+
+.shadow-success-shadow-large {
+  box-shadow: 5px 5px 0 0 rgb(208, 255, 0);
+}
+
+.shadow-warning-shadow-small {
+  box-shadow: 2px 2px 0 0 rgb(255, 118, 13);
+}
+
+.shadow-warning-shadow-medium {
+  box-shadow: 3px 3px 0 0 rgb(255, 118, 13);
+}
+
+.shadow-warning-shadow-large {
+  box-shadow: 5px 5px 0 0 rgb(255, 118, 13);
+}
+
+.shadow-error-100-shadow-small {
+  box-shadow: 2px 2px 0 0 rgb(255, 224, 231);
+}
+
+.shadow-error-100-shadow-medium {
+  box-shadow: 3px 3px 0 0 rgb(255, 224, 231);
+}
+
+.shadow-error-100-shadow-large {
+  box-shadow: 5px 5px 0 0 rgb(255, 224, 231);
+}
+
+.shadow-error-shadow-small {
+  box-shadow: 2px 2px 0 0 rgb(255, 0, 85);
+}
+
+.shadow-error-shadow-medium {
+  box-shadow: 3px 3px 0 0 rgb(255, 0, 85);
+}
+
+.shadow-error-shadow-large {
+  box-shadow: 5px 5px 0 0 rgb(255, 0, 85);
+}
+
 .content-fade-in {
   animation: pageEnter 0.15s ease-out;
 }
@@ -129,26 +201,31 @@ body {
 }
 
 .ai-scanline {
+  --ai-scanline-stripe-width: 8.485px;
+  --ai-scanline-repeat-width: 16.97px;
+  --ai-scanline-shift: 24px;
+
   position: absolute;
   top: 0;
   bottom: 0;
-  left: -23px;
-  right: -23px;
+  left: calc(var(--ai-scanline-shift) * -1);
+  right: calc(var(--ai-scanline-shift) * -1);
   mask-image: repeating-linear-gradient(
     135deg,
     transparent,
-    transparent 8px,
-    black 8px,
-    black 16px
+    transparent var(--ai-scanline-stripe-width),
+    black var(--ai-scanline-stripe-width),
+    black var(--ai-scanline-repeat-width)
   );
   -webkit-mask-image: repeating-linear-gradient(
     135deg,
     transparent,
-    transparent 8px,
-    black 8px,
-    black 16px
+    transparent var(--ai-scanline-stripe-width),
+    black var(--ai-scanline-stripe-width),
+    black var(--ai-scanline-repeat-width)
   );
-  animation: aiScanlineSweep 0.8s linear infinite;
+  animation: aiScanlineSweep 0.8s steps(24, end) infinite;
+  will-change: transform;
 }
 
 @keyframes pageEnter {
@@ -174,7 +251,7 @@ body {
     transform: translateX(0);
   }
   to {
-    transform: translateX(23px);
+    transform: translateX(var(--ai-scanline-shift));
   }
 }
 

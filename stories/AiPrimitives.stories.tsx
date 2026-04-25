@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { AiChat, AssistantMessage, ChatHistoryList, ChatInput, SuggestedPrompts, ToolApprovalCard, type AiChatAdapter, type AiChatMessage, type ChatHistorySession, type SuggestedPrompt, type ToolApproval, UserMessage } from "../src";
+import { AiChat, AiLoadingScanline, AssistantMessage, ChatHistoryList, ChatInput, SuggestedPrompts, ToolApprovalCard, useTheme, type AiChatAdapter, type AiChatMessage, type ChatHistorySession, type SuggestedPrompt, type ToolApproval, UserMessage } from "../src";
 
 const prompts: SuggestedPrompt[] = [
   { id: "1", label: "Summarize the latest alert" },
@@ -94,6 +94,26 @@ export const Messages: Story = {
       <div className="flex w-[760px] flex-col gap-4 rounded-md border border-neutral-border bg-default-background p-4">
         <UserMessage message={userMessage} />
         <AssistantMessage message={assistantMessage} />
+      </div>
+    );
+  },
+};
+
+export const LoadingScanline: Story = {
+  render: () => {
+    const { resolvedTheme } = useTheme();
+    const isDarkTheme = resolvedTheme === "dark";
+
+    return (
+      <div className="w-[520px] rounded-md border border-neutral-border bg-default-background p-4">
+        <div className={`flex w-full min-w-0 flex-col items-start gap-2 rounded-md px-3 py-3 ${isDarkTheme ? "bg-neutral-100" : "bg-neutral-200"}`}>
+          <div className="flex w-full flex-col gap-1">
+            <div className="flex items-center gap-2 text-caption font-caption text-default-font">
+              <span>Generating response</span>
+            </div>
+            <AiLoadingScanline />
+          </div>
+        </div>
       </div>
     );
   },

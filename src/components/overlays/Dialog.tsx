@@ -18,7 +18,7 @@ const Content = React.forwardRef<HTMLDivElement, ContentProps>(function Content(
   return children ? (
     <div
       className={cn(
-        "flex max-h-[90vh] min-w-[320px] flex-col items-start gap-2 overflow-auto rounded-md border border-solid border-neutral-border bg-default-background shadow-lg",
+        "flex max-h-[90vh] min-w-[320px] flex-col items-start gap-2 overflow-auto rounded-md border border-solid border-neutral-200 bg-neutral-50 shadow-neutral-200-shadow-medium",
         className,
       )}
       ref={ref}

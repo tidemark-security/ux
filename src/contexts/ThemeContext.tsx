@@ -20,12 +20,17 @@ interface ThemeContextValue {
 
 const ThemeContext = React.createContext<ThemeContextValue | null>(null);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+interface ThemeProviderProps {
+  children: React.ReactNode;
+  initialThemePreference?: ThemePreference;
+}
+
+export function ThemeProvider({ children, initialThemePreference }: ThemeProviderProps) {
   const [themePreference, setThemePreferenceState] = React.useState<ThemePreference>(() =>
-    getStoredThemePreference(),
+    initialThemePreference ?? getStoredThemePreference(),
   );
   const [resolvedTheme, setResolvedTheme] = React.useState<ResolvedTheme>(() =>
-    resolveThemePreference(getStoredThemePreference()),
+    resolveThemePreference(initialThemePreference ?? getStoredThemePreference()),
   );
 
   React.useEffect(() => {
