@@ -86,7 +86,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "playwright": "^1.59.1",
-    "postcss": "^8.4.32",
+    "postcss": "^8.5.10",
     "postcss-nesting": "^13.0.2",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
