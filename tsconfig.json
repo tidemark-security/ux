@@ -18,9 +18,8 @@
     "jsx": "react-jsx",
     "declaration": true,
     "declarationMap": true,
-    "baseUrl": ".",
     "paths": {
-      "@ux/*": ["src/*"]
+      "@ux/*": ["./src/*"]
     }
   },
   "include": ["src"]

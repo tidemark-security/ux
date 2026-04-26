@@ -3,7 +3,7 @@
 import React from "react";
 import { AlertTriangle } from "lucide-react";
 
-import { Button } from "../buttons/Button";
+import { Button } from "../actions/Button";
 import type { ToolApprovalCardProps } from "./types";
 
 export function ToolApprovalCard({ messageId, approval, onApprove, onDeny }: ToolApprovalCardProps) {

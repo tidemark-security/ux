@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { CheckSquare, ChevronDown, Search, Square, User, UserPlus, UserX } from "lucide-react";
 
-import { Button } from "../buttons/Button";
+import { Button } from "../actions/Button";
 import { TextField } from "./TextField";
 import { DropdownMenu } from "../overlays/DropdownMenu";
 

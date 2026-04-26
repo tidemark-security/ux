@@ -3,8 +3,8 @@
 import React from "react";
 import { Calendar, ChevronDown } from "lucide-react";
 
-import { Accordion } from "../misc/Accordion";
-import { Button } from "../buttons/Button";
+import { Accordion } from "../overlays/Accordion";
+import { Button } from "../actions/Button";
 import { DropdownMenu } from "../overlays/DropdownMenu";
 import { TextField } from "./TextField";
 import { useTheme } from "../../contexts/ThemeContext";

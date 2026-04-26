@@ -3,7 +3,7 @@
 import React from "react";
 import { File, Folder as FolderIcon } from "lucide-react";
 
-import { Accordion } from "../misc/Accordion";
+import { Accordion } from "../overlays/Accordion";
 import { IconWrapper } from "../../utils/IconWrapper";
 import { cn } from "../../utils/cn";
 

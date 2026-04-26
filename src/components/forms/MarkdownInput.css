@@ -1,0 +1,303 @@
+.mdx-editor-timeline.dark-theme {
+  --accentBase: rgb(18, 25, 0);
+  --accentBgSubtle: rgb(36, 52, 0);
+  --accentBg: rgb(71, 92, 11);
+  --accentBgHover: rgb(84, 109, 7);
+  --accentBgActive: rgb(106, 139, 0);
+  --accentLine: rgb(141, 184, 0);
+  --accentBorder: rgb(182, 230, 0);
+  --accentBorderHover: rgb(208, 255, 0);
+  --accentSolid: rgb(208, 255, 0);
+  --accentSolidHover: rgb(229, 255, 80);
+  --accentText: rgb(229, 255, 80);
+  --accentTextContrast: rgb(243, 255, 144);
+
+  --accent1Base: #00ffd9;
+
+  --basePageBg: rgb(5, 7, 5);
+  --baseBase: rgb(10, 15, 13);
+  --baseBgSubtle: rgb(23, 23, 23);
+  --baseBg: transparent;
+  --baseBgHover: rgb(64, 64, 64);
+  --baseBgActive: rgb(82, 82, 82);
+  --baseLine: rgb(82, 82, 82);
+  --baseBorder: rgb(115, 115, 115);
+  --baseBorderHover: rgb(163, 163, 163);
+  --baseSolid: rgb(163, 163, 163);
+  --baseSolidHover: rgb(212, 212, 212);
+  --baseText: rgb(250, 250, 250);
+  --baseTextContrast: rgb(255, 255, 255);
+
+  background: var(--baseBg);
+  color: var(--baseText);
+}
+
+.mdx-editor-timeline.light-theme {
+  --accentBase: rgb(18, 25, 0);
+  --accentBgSubtle: rgb(253, 255, 228);
+  --accentBg: rgb(249, 255, 196);
+  --accentBgHover: rgb(243, 255, 144);
+  --accentBgActive: rgb(229, 255, 80);
+  --accentLine: rgb(182, 230, 0);
+  --accentBorder: rgb(182, 230, 0);
+  --accentBorderHover: rgb(141, 184, 0);
+  --accentSolid: rgb(182, 230, 0);
+  --accentSolidHover: rgb(141, 184, 0);
+  --accentText: rgb(106, 139, 0);
+  --accentTextContrast: rgb(36, 52, 0);
+
+  --accent1Base: #00ffd9;
+
+  --basePageBg: rgb(255, 255, 255);
+  --baseBase: rgb(255, 255, 255);
+  --baseBgSubtle: rgb(250, 250, 250);
+  --baseBg: transparent;
+  --baseBgHover: rgb(245, 245, 245);
+  --baseBgActive: rgb(229, 229, 229);
+  --baseLine: rgb(229, 229, 229);
+  --baseBorder: rgb(212, 212, 212);
+  --baseBorderHover: rgb(163, 163, 163);
+  --baseSolid: rgb(115, 115, 115);
+  --baseSolidHover: rgb(82, 82, 82);
+  --baseText: rgb(23, 23, 23);
+  --baseTextContrast: rgb(10, 10, 10);
+
+  background: var(--baseBg);
+  color: var(--baseText);
+}
+
+.mdx-editor-timeline {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-rows: minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+  font-family: "Saira", sans-serif;
+}
+
+.mdx-editor-timeline .mdxeditor-diff-source-wrapper,
+.mdx-editor-timeline .mdxeditor-root-contenteditable {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-rows: minmax(0, 1fr);
+  min-height: 0;
+}
+
+.mdx-editor-timeline .mdxeditor-rich-text-editor:not([style*="display: none"]) {
+  display: grid !important;
+  flex: 1 1 auto;
+  grid-template-rows: minmax(0, 1fr);
+  min-height: 0;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable {
+  position: relative;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable > div:first-child {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-rows: minmax(0, 1fr);
+  min-height: 0;
+}
+
+.mdx-editor-timeline [contenteditable="true"] {
+  flex: 1 1 auto;
+  height: 100%;
+  min-height: 100%;
+}
+
+.mdx-editor-timeline [class*="_placeholder_"] {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable:focus-within [class*="_placeholder_"] {
+  display: none;
+}
+
+.mdx-editor-timeline .cm-sourceView,
+.mdx-editor-timeline .cm-editor,
+.mdx-editor-timeline .cm-scroller {
+  height: 100%;
+  min-height: 0;
+}
+
+.mdx-editor-timeline .cm-sourceView,
+.mdx-editor-timeline .cm-editor {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.mdx-editor-timeline .cm-content {
+  min-height: 100%;
+}
+
+.mdx-editor-timeline .cm-gutters {
+  min-height: 100% !important;
+}
+
+.mdx-editor-timeline p,
+.mdx-editor-timeline li {
+  font-family: "Saira", sans-serif;
+}
+
+.mdx-editor-timeline p {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.mdx-editor-timeline code {
+  font-size: 14px;
+}
+
+.mdx-editor-timeline ::selection,
+.mdx-editor-timeline ::-moz-selection {
+  background-color: var(--accent1Base);
+  color: #000 !important;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable li::marker {
+  color: var(--baseText) !important;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable li {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.mdx-editor-timeline [class*="_placeholder_"] p {
+  margin: 0;
+}
+
+.mdx-editor-timeline .mdxeditor-select-content {
+  background: var(--baseBgHover);
+  color: var(--baseText);
+  border: 1px solid var(--baseBorder);
+  border-radius: 0;
+  padding: 4px;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable pre {
+  background: var(--baseBgHover);
+  border: 1px solid var(--baseBorder);
+  border-radius: 0;
+  padding: 12px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable code {
+  background: var(--baseBgHover);
+  color: var(--accentText);
+  padding: 2px 6px;
+  border-radius: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable code::before,
+.mdx-editor-timeline .mdxeditor-root-contenteditable code::after,
+.mdx-editor-timeline .mdxeditor-root-contenteditable code[data-lexical-text="true"]::before,
+.mdx-editor-timeline .mdxeditor-root-contenteditable code[data-lexical-text="true"]::after {
+  content: none !important;
+  display: none !important;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable a {
+  color: var(--accentText);
+  text-decoration: underline;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable a:hover {
+  color: var(--accentTextContrast);
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable blockquote {
+  border-left: 3px solid var(--accentBorder);
+  padding-left: 16px;
+  color: var(--baseText);
+  margin: 16px 0;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable ul,
+.mdx-editor-timeline .mdxeditor-root-contenteditable ol {
+  padding-left: 24px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable ul > li[role="checkbox"] {
+  padding-inline-start: 24px;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable h1,
+.mdx-editor-timeline .mdxeditor-root-contenteditable h2,
+.mdx-editor-timeline .mdxeditor-root-contenteditable h3,
+.mdx-editor-timeline .mdxeditor-root-contenteditable h4,
+.mdx-editor-timeline .mdxeditor-root-contenteditable h5,
+.mdx-editor-timeline .mdxeditor-root-contenteditable h6 {
+  color: var(--baseTextContrast);
+  font-weight: 600;
+  font-family: "Saira Condensed", sans-serif;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable h1 {
+  font-size: 30px;
+  line-height: 36px;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable h2 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable h3 {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.mdx-editor-timeline .mdxeditor-root-contenteditable h4 {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.mdx-editor-timeline button[data-toolbar-item="true"] {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--baseText);
+  padding: 6px 8px;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.mdx-editor-timeline button[data-toolbar-item="true"]:hover {
+  background: var(--baseBgHover);
+  border-color: var(--baseBorder);
+}
+
+.mdx-editor-timeline button[data-toolbar-item="true"][data-active="true"] {
+  background: var(--accentBg);
+  border-color: var(--accentBorder);
+  color: var(--accentText);
+}
+
+.mdx-editor-timeline .mdxeditor-popup-container {
+  background: var(--baseBg);
+  border: 1px solid var(--baseBorder);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.mdx-editor-timeline select {
+  background: var(--baseBgHover);
+  color: var(--baseText);
+  border: 1px solid var(--baseBorder);
+  border-radius: 0;
+  padding: 4px 8px;
+}

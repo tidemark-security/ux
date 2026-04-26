@@ -59,12 +59,12 @@ const TagRoot = React.forwardRef<HTMLDivElement, TagProps>(function TagRoot(
       {tagText ? (
         <span
           className={cn(
-            "line-clamp-1 grow shrink-0 basis-0 overflow-hidden text-ellipsis text-center text-caption font-caption text-black",
+            "line-clamp-1 grow shrink-0 basis-0 overflow-hidden text-ellipsis text-center text-caption font-caption",
             {
-              "text-neutral-0": p === "5",
-              "text-brand-secondary": p === "4",
-              "text-black": p === "3",
-              "text-white": p === "2" || p === "1" || p === "0",
+              "text-[#0A0A0A]": p === "5",
+              "text-[#0A0F0D]": p === "4",
+              "text-black": p === "default" || p === "3" || p === "2",
+              "text-white": p === "1" || p === "0",
             },
           )}
         >
@@ -74,7 +74,7 @@ const TagRoot = React.forwardRef<HTMLDivElement, TagProps>(function TagRoot(
       <div className={cn("hidden h-4 w-4 flex-none items-center justify-center gap-1", { flex: showDelete })}>
         <ConditionalDeleteButton
           className={cn("hidden", { flex: showDelete })}
-          mode={p === "5" || p === "4" || p === "3" ? "dark" : "light"}
+          mode={p === "5" || p === "4" || p === "3" || p === "2" ? "dark" : "light"}
         />
       </div>
     </div>

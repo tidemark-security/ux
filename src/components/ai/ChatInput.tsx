@@ -5,7 +5,7 @@ import { History, Send, Sparkles } from "lucide-react";
 
 import { useTheme } from "../../contexts/ThemeContext";
 import { cn } from "../../utils/cn";
-import { IconButton } from "../buttons/IconButton";
+import { IconButton } from "../actions/IconButton";
 import type { ChatInputProps } from "./types";
 
 export function ChatInput({

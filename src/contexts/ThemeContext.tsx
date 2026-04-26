@@ -76,8 +76,12 @@ export function ThemeProvider({ children, initialThemePreference }: ThemeProvide
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
+export function useOptionalTheme(): ThemeContextValue | null {
+  return React.useContext(ThemeContext);
+}
+
 export function useTheme(): ThemeContextValue {
-  const context = React.useContext(ThemeContext);
+  const context = useOptionalTheme();
   if (!context) {
     throw new Error("useTheme must be used within ThemeProvider");
   }

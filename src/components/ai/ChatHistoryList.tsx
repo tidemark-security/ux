@@ -3,11 +3,11 @@
 import React, { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import { AlertCircle, Edit2, History, Loader, MessageSquare, Plus, Trash2, X } from "lucide-react";
 
-import { Button } from "../buttons/Button";
-import { IconButton } from "../buttons/IconButton";
+import { Button } from "../actions/Button";
+import { IconButton } from "../actions/IconButton";
 import { MenuCardBase, getMenuCardMetaClassName, getMenuCardTitleClassName } from "../cards/MenuCardBase";
 import { RelativeTime } from "../data-display/RelativeTime";
-import { IconWithBackground } from "../misc/IconWithBackground";
+import { IconWithBackground } from "../data-display/IconWithBackground";
 import { Dialog } from "../overlays/Dialog";
 import { DropdownMenu } from "../overlays/DropdownMenu";
 import { useTheme } from "../../contexts/ThemeContext";
@@ -165,7 +165,6 @@ function SessionItem({
 
   return (
     <MenuCardBase
-      isDarkTheme={isDarkTheme}
       variant={variant}
       className="flex-row flex-nowrap items-center justify-between gap-3"
       onClick={onClick}
@@ -193,9 +192,16 @@ function SessionItem({
           }}
         >
           <DropdownMenu.Trigger asChild>
-            <div onClick={(event) => event.stopPropagation()}>
-              <IconButton variant="neutral-tertiary" size="small" icon={<Edit2 />} onClick={onStartEdit} />
-            </div>
+            <IconButton
+              variant="neutral-tertiary"
+              size="small"
+              icon={<Edit2 />}
+              aria-label="Rename chat"
+              onClick={(event) => {
+                event.stopPropagation();
+                onStartEdit(event);
+              }}
+            />
           </DropdownMenu.Trigger>
           <DropdownMenu.Content side="bottom" align="end" sideOffset={6} onClick={(event) => event.stopPropagation()}>
             <div className="flex min-w-[240px] flex-col gap-2 px-2 py-2">
@@ -237,9 +243,16 @@ function SessionItem({
           }}
         >
           <DropdownMenu.Trigger asChild>
-            <div onClick={(event) => event.stopPropagation()}>
-              <IconButton variant="neutral-tertiary" size="small" icon={<Trash2 />} onClick={onStartDelete} />
-            </div>
+            <IconButton
+              variant="neutral-tertiary"
+              size="small"
+              icon={<Trash2 />}
+              aria-label="Delete chat"
+              onClick={(event) => {
+                event.stopPropagation();
+                onStartDelete(event);
+              }}
+            />
           </DropdownMenu.Trigger>
           <DropdownMenu.Content side="bottom" align="end" sideOffset={6} onClick={(event) => event.stopPropagation()}>
             <div className="flex min-w-[220px] flex-col gap-2 px-2 py-2">

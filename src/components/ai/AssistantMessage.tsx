@@ -4,7 +4,7 @@ import React from "react";
 import { Check, Copy, ThumbsDown, ThumbsUp } from "lucide-react";
 
 import { useTheme } from "../../contexts/ThemeContext";
-import { IconButton } from "../buttons/IconButton";
+import { IconButton } from "../actions/IconButton";
 import { MarkdownContent } from "../data-display/MarkdownContent";
 import { RelativeTime } from "../data-display/RelativeTime";
 import { Tooltip } from "../overlays/Tooltip";
@@ -66,6 +66,7 @@ function AssistantMessageComponent({
                     icon={message.feedback === "positive" ? <Check /> : <ThumbsUp />}
                     onClick={() => onFeedbackPositive?.(message.id)}
                     disabled={message.feedback === "positive"}
+                    aria-label={message.feedback === "positive" ? "Positive feedback sent" : "Mark response as helpful"}
                   />
                 </Tooltip.Trigger>
                 <Tooltip.Content side="bottom" align="center" sideOffset={4}>
@@ -82,6 +83,7 @@ function AssistantMessageComponent({
                     icon={message.feedback === "negative" ? <Check /> : <ThumbsDown />}
                     onClick={() => onFeedbackNegative?.(message.id)}
                     disabled={message.feedback === "negative"}
+                    aria-label={message.feedback === "negative" ? "Negative feedback sent" : "Mark response as unhelpful"}
                   />
                 </Tooltip.Trigger>
                 <Tooltip.Content side="bottom" align="center" sideOffset={4}>
@@ -93,7 +95,12 @@ function AssistantMessageComponent({
             <Tooltip.Provider>
               <Tooltip.Root>
                 <Tooltip.Trigger asChild>
-                  <IconButton size="small" icon={copied ? <Check /> : <Copy />} onClick={handleCopy} />
+                  <IconButton
+                    size="small"
+                    icon={copied ? <Check /> : <Copy />}
+                    onClick={handleCopy}
+                    aria-label={copied ? "Response copied" : "Copy response"}
+                  />
                 </Tooltip.Trigger>
                 <Tooltip.Content side="bottom" align="center" sideOffset={4}>
                   {copied ? "Copied!" : "Copy"}

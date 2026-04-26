@@ -4,4 +4,4 @@ export { IconButton } from "./IconButton";
 export type { IconButtonProps } from "./IconButton";
 export { LinkButton } from "./LinkButton";
 export type { LinkButtonProps } from "./LinkButton";
-export { ToggleGroup } from "./ToggleGroup";
+export { ToggleGroup } from "../forms/ToggleGroup";

@@ -2,16 +2,82 @@
 
 import React from "react";
 
+import { useOptionalTheme } from "../../contexts/ThemeContext";
+import {
+  getStoredThemePreference,
+  resolveThemePreference,
+  type ResolvedTheme,
+} from "../../utils/themePreference";
 import { cn } from "../../utils/cn";
 
 export type MenuCardBaseVariant = "default" | "selected";
 
 export interface MenuCardBaseProps extends React.HTMLAttributes<HTMLDivElement> {
-  isDarkTheme: boolean;
   variant?: MenuCardBaseVariant;
 }
 
 const MENU_CARD_GROUP_CLASS = "group/6c3f1f95";
+
+function getFallbackResolvedTheme(): ResolvedTheme {
+  if (typeof document !== "undefined") {
+    const rootTheme = document.documentElement.getAttribute("data-theme");
+    if (rootTheme === "dark" || rootTheme === "light") {
+      return rootTheme;
+    }
+  }
+
+  return resolveThemePreference(getStoredThemePreference());
+}
+
+function useMenuCardIsDarkTheme(): boolean {
+  const theme = useOptionalTheme();
+  const [fallbackResolvedTheme, setFallbackResolvedTheme] = React.useState<ResolvedTheme>(
+    () => getFallbackResolvedTheme(),
+  );
+
+  React.useEffect(() => {
+    if (theme) {
+      return;
+    }
+
+    const syncResolvedTheme = () => {
+      setFallbackResolvedTheme(getFallbackResolvedTheme());
+    };
+
+    syncResolvedTheme();
+
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    const observer = new MutationObserver(syncResolvedTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    if (typeof window.matchMedia !== "function") {
+      return () => observer.disconnect();
+    }
+
+    const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
+    if (typeof mediaQueryList.addEventListener === "function") {
+      mediaQueryList.addEventListener("change", syncResolvedTheme);
+      return () => {
+        observer.disconnect();
+        mediaQueryList.removeEventListener("change", syncResolvedTheme);
+      };
+    }
+
+    mediaQueryList.addListener(syncResolvedTheme);
+    return () => {
+      observer.disconnect();
+      mediaQueryList.removeListener(syncResolvedTheme);
+    };
+  }, [theme]);
+
+  return theme ? theme.resolvedTheme === "dark" : fallbackResolvedTheme === "dark";
+}
 
 export function getMenuCardTitleClassName(
   isDarkTheme: boolean,
@@ -45,9 +111,11 @@ export function getMenuCardMetaClassName(
 }
 
 export const MenuCardBase = React.forwardRef<HTMLDivElement, MenuCardBaseProps>(function MenuCardBase(
-  { isDarkTheme, variant = "default", className, children, ...otherProps },
+  { variant = "default", className, children, ...otherProps },
   ref,
 ) {
+  const isDarkTheme = useMenuCardIsDarkTheme();
+
   return (
     <div
       className={cn(

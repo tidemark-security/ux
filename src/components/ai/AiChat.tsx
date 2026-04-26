@@ -5,7 +5,7 @@ import { AlertCircle, RefreshCw, Sparkles, X } from "lucide-react";
 
 import { useTheme } from "../../contexts/ThemeContext";
 import { cn } from "../../utils/cn";
-import { IconButton } from "../buttons/IconButton";
+import { IconButton } from "../actions/IconButton";
 import { AssistantMessage } from "./AssistantMessage";
 import { ChatInput } from "./ChatInput";
 import { SuggestedPrompts } from "./SuggestedPrompts";

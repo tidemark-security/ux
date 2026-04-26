@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowLeft } from "lucide-react";
 
-import { IconButton } from "../buttons/IconButton";
+import { IconButton } from "../actions/IconButton";
 import { Link } from "../navigation/Link";
 import { DefaultPageLayout, type DefaultPageLayoutProps } from "./DefaultPageLayout";
 
