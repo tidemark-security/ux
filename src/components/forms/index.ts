@@ -1,6 +1,8 @@
 export { AssigneeSelector } from "./AssigneeSelector";
 export { Calendar } from "./Calendar";
 export type { CalendarProps } from "./Calendar";
+export { Checkbox } from "./Checkbox";
+export type { CheckboxProps } from "./Checkbox";
 export { DateRangePicker } from "./DateRangePicker";
 export type { DateRangeValue, DateRangePickerProps } from "./DateRangePicker";
 export { DateTimeManager } from "./DateTimeManager";
