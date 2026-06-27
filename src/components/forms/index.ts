@@ -11,6 +11,7 @@ export { RadioCardGroup } from "./RadioCardGroup";
 export type { RadioCardGroupProps, RadioCardProps } from "./RadioCardGroup";
 export { RadioGroup } from "./RadioGroup";
 export { ToggleGroup } from "./ToggleGroup";
+export type { ToggleGroupLabelDisplay, ToggleGroupVariant } from "./ToggleGroup";
 export { MarkdownInput } from "./MarkdownInput";
 export type { MarkdownInputProps } from "./MarkdownInput";
 export { Select } from "./Select";

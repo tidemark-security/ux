@@ -24,6 +24,7 @@ export const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentPro
     const portalContainer = usePortalContainer();
     const { resolvedTheme } = useTheme();
     const isDarkTheme = resolvedTheme === "dark";
+    const isPlainContent = typeof children === "string" || typeof children === "number";
 
     return (
       <RadixTooltip.Portal container={portalContainer}>
@@ -43,7 +44,11 @@ export const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentPro
           ref={ref}
           {...otherProps}
         >
-          {children ? <span className="text-caption font-caption text-black">{children}</span> : null}
+          {isPlainContent ? (
+            <span className="text-caption font-caption text-black">{children}</span>
+          ) : (
+            children
+          )}
         </RadixTooltip.Content>
       </RadixTooltip.Portal>
     );
@@ -61,6 +66,7 @@ const TooltipStyled = React.forwardRef<HTMLDivElement, TooltipStyledProps>(funct
 ) {
   const { resolvedTheme } = useTheme();
   const isDarkTheme = resolvedTheme === "dark";
+  const isPlainContent = typeof children === "string" || typeof children === "number";
 
   return (
     <div
@@ -72,7 +78,11 @@ const TooltipStyled = React.forwardRef<HTMLDivElement, TooltipStyledProps>(funct
       ref={ref}
       {...otherProps}
     >
-      {children ? <span className="text-caption font-caption text-black">{children}</span> : null}
+      {isPlainContent ? (
+        <span className="text-caption font-caption text-black">{children}</span>
+      ) : (
+        children
+      )}
     </div>
   );
 });
