@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Bell, Filter, FolderKanban, Sparkles } from "lucide-react";
+import { Bell, CheckSquare, Filter, NotebookPen, Sparkles } from "lucide-react";
 
 import { ToggleGroup } from "../../src";
 
@@ -23,11 +23,11 @@ export const SingleSelect: Story = {
         <ToggleGroup.Item icon={<Bell />} value="alerts">
           Alerts
         </ToggleGroup.Item>
-        <ToggleGroup.Item icon={<FolderKanban />} value="cases">
+        <ToggleGroup.Item icon={<NotebookPen />} value="cases">
           Cases
         </ToggleGroup.Item>
-        <ToggleGroup.Item icon={<Sparkles />} value="assist">
-          Assist
+        <ToggleGroup.Item icon={<CheckSquare />} value="tasks">
+          Tasks
         </ToggleGroup.Item>
       </ToggleGroup>
     );

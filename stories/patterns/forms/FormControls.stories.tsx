@@ -53,7 +53,7 @@ export const SelectionControls: Story = {
             <span className="text-caption-bold font-caption-bold text-default-font">Live enrichment</span>
             <span className="text-caption font-caption text-subtext-color">Toggle background enrichment polling</span>
           </div>
-          <Switch checked={enabled} onCheckedChange={setEnabled} />
+          <Switch checked={enabled} onCheckedChange={setEnabled} label />
         </div>
       </div>
     );

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Bell, Bot, FolderKanban, LayoutDashboard, Search, Settings, ShieldCheck, Sparkles, Users } from "lucide-react";
+import { Bell, Bot, CheckSquare, LayoutDashboard, NotebookPen, Search, Settings, ShieldCheck, Sparkles, Users } from "lucide-react";
 
 import { Button, IconButton, SidebarRailWithLabels, SidebarWithSections, Tag } from "../../../src";
 
@@ -45,7 +45,8 @@ export const OperationsConsole: Story = {
             <SidebarWithSections.NavItem icon={<Bell />} rightSlot={<Tag tagText="4" />}>
               Alerts
             </SidebarWithSections.NavItem>
-            <SidebarWithSections.NavItem icon={<FolderKanban />}>Cases</SidebarWithSections.NavItem>
+            <SidebarWithSections.NavItem icon={<NotebookPen />}>Cases</SidebarWithSections.NavItem>
+            <SidebarWithSections.NavItem icon={<CheckSquare />}>Tasks</SidebarWithSections.NavItem>
             <SidebarWithSections.NavItem icon={<Bot />}>Assist queues</SidebarWithSections.NavItem>
           </SidebarWithSections.NavSection>
           <SidebarWithSections.NavSection label="Configure">
@@ -116,7 +117,8 @@ export const MobileDispatchView: Story = {
       <div className="mt-auto border-t border-neutral-border p-3">
         <SidebarRailWithLabels mobile className="rounded-lg border border-brand-primary bg-black">
           <SidebarRailWithLabels.NavItem mobile icon={<Bell />}>Alerts</SidebarRailWithLabels.NavItem>
-          <SidebarRailWithLabels.NavItem mobile icon={<FolderKanban />}>Cases</SidebarRailWithLabels.NavItem>
+          <SidebarRailWithLabels.NavItem mobile icon={<NotebookPen />}>Cases</SidebarRailWithLabels.NavItem>
+          <SidebarRailWithLabels.NavItem mobile icon={<CheckSquare />}>Tasks</SidebarRailWithLabels.NavItem>
           <SidebarRailWithLabels.NavItem mobile icon={<Sparkles />}>Assist</SidebarRailWithLabels.NavItem>
         </SidebarRailWithLabels>
       </div>

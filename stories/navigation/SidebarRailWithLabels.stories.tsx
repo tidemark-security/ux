@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Bell, LayoutDashboard, Settings, Sparkles, Users } from "lucide-react";
+import { Bell, CheckSquare, LayoutDashboard, NotebookPen, Settings, Sparkles, Users } from "lucide-react";
 
 import { SidebarRailWithLabels } from "../../src";
 
@@ -30,6 +30,8 @@ export const Desktop: Story = {
         <SidebarRailWithLabels.NavItem icon={<Sparkles />}>Assist</SidebarRailWithLabels.NavItem>
         <SidebarRailWithLabels.NavItem icon={<Users />}>Analysts</SidebarRailWithLabels.NavItem>
         <SidebarRailWithLabels.NavItem icon={<Bell />}>Alerts</SidebarRailWithLabels.NavItem>
+        <SidebarRailWithLabels.NavItem icon={<NotebookPen />}>Cases</SidebarRailWithLabels.NavItem>
+        <SidebarRailWithLabels.NavItem icon={<CheckSquare />}>Tasks</SidebarRailWithLabels.NavItem>
       </SidebarRailWithLabels>
     </div>
   ),
@@ -41,6 +43,12 @@ export const Mobile: Story = {
       <SidebarRailWithLabels mobile className="rounded-lg border border-brand-primary bg-black">
         <SidebarRailWithLabels.NavItem mobile icon={<Bell />} selected>
           Alerts
+        </SidebarRailWithLabels.NavItem>
+        <SidebarRailWithLabels.NavItem mobile icon={<NotebookPen />}>
+          Cases
+        </SidebarRailWithLabels.NavItem>
+        <SidebarRailWithLabels.NavItem mobile icon={<CheckSquare />}>
+          Tasks
         </SidebarRailWithLabels.NavItem>
         <SidebarRailWithLabels.NavItem mobile icon={<Sparkles />}>
           Assist

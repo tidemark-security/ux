@@ -28,17 +28,34 @@ const Thumb = React.forwardRef<HTMLSpanElement, ThumbProps>(function Thumb(
 
 export interface SwitchProps extends React.ComponentPropsWithoutRef<typeof RadixSwitch.Root> {
   checked?: boolean;
+  label?: boolean;
   onCheckedChange?: (checked: boolean) => void;
   className?: string;
 }
 
 const SwitchRoot = React.forwardRef<HTMLButtonElement, SwitchProps>(function SwitchRoot(
-  { checked = false, className, ...otherProps },
+  { checked, defaultChecked, label = false, onCheckedChange, className, ...otherProps },
   ref,
 ) {
-  return (
+  const isControlled = checked !== undefined;
+  const [uncontrolledChecked, setUncontrolledChecked] = React.useState(Boolean(defaultChecked));
+  const currentChecked = isControlled ? checked : uncontrolledChecked;
+
+  const handleCheckedChange = React.useCallback(
+    (nextChecked: boolean) => {
+      if (!isControlled) {
+        setUncontrolledChecked(nextChecked);
+      }
+      onCheckedChange?.(nextChecked);
+    },
+    [isControlled, onCheckedChange],
+  );
+
+  const root = (
     <RadixSwitch.Root
       checked={checked}
+      defaultChecked={defaultChecked}
+      onCheckedChange={handleCheckedChange}
       className={cn(
         "group/7a464794 relative inline-flex h-6 w-12 cursor-pointer items-center border border-solid border-neutral-300 bg-neutral-200 px-1 py-1",
         "data-[state=checked]:border data-[state=checked]:border-solid data-[state=checked]:border-brand-primary data-[state=checked]:bg-brand-500",
@@ -53,22 +70,35 @@ const SwitchRoot = React.forwardRef<HTMLButtonElement, SwitchProps>(function Swi
         aria-hidden="true"
         className={cn(
           "pointer-events-none absolute left-2 text-[10px] font-semibold leading-none transition-colors",
-          checked ? "text-black/75" : "text-transparent",
+          currentChecked ? "text-black/75" : "text-transparent",
         )}
       >
-        O
+        I
       </span>
       <span
         aria-hidden="true"
         className={cn(
           "pointer-events-none absolute right-2 text-[10px] font-semibold leading-none transition-colors",
-          checked ? "text-transparent" : "text-neutral-1000/75",
+          currentChecked ? "text-transparent" : "text-neutral-1000/75",
         )}
       >
-        I
+        O
       </span>
       <Thumb />
     </RadixSwitch.Root>
+  );
+
+  if (!label) {
+    return root;
+  }
+
+  return (
+    <span className="inline-flex items-center gap-2 align-middle">
+      <span className="min-w-6 text-caption-bold font-caption-bold text-subtext-color">
+        {currentChecked ? "On" : "Off"}
+      </span>
+      {root}
+    </span>
   );
 });
 

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Bell, Bot, FolderKanban, Settings, ShieldCheck, Users } from "lucide-react";
+import { Bell, Bot, CheckSquare, NotebookPen, Settings, ShieldCheck, Users } from "lucide-react";
 
 import { SidebarWithSections, Tag } from "../../src";
 
@@ -33,7 +33,8 @@ export const Default: Story = {
           <SidebarWithSections.NavItem icon={<Bell />} rightSlot={<Tag tagText="4" />}>
             Alerts
           </SidebarWithSections.NavItem>
-          <SidebarWithSections.NavItem icon={<FolderKanban />}>Cases</SidebarWithSections.NavItem>
+          <SidebarWithSections.NavItem icon={<NotebookPen />}>Cases</SidebarWithSections.NavItem>
+          <SidebarWithSections.NavItem icon={<CheckSquare />}>Tasks</SidebarWithSections.NavItem>
           <SidebarWithSections.NavItem icon={<Bot />}>Assist queues</SidebarWithSections.NavItem>
         </SidebarWithSections.NavSection>
         <SidebarWithSections.NavSection label="Configure">

@@ -15,6 +15,7 @@ export { Select } from "./Select";
 export type { SelectProps } from "./Select";
 export { Slider } from "./Slider";
 export { Switch } from "./Switch";
+export type { SwitchProps } from "./Switch";
 export { TagInput } from "./TagInput";
 export { TagsManager } from "./TagsManager";
 export type { TagsManagerProps } from "./TagsManager";

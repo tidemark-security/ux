@@ -115,6 +115,7 @@ const preview: Preview = {
     },
 
     docs: {
+      codePanel: true,
       toc: {
         headingSelector: "h2",
       },
