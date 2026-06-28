@@ -45,7 +45,9 @@ const NavItem = React.forwardRef<HTMLDivElement, NavItemProps>(function NavItem(
           </div>
         </Tooltip.Trigger>
         <Tooltip.Content side="right" align="center" sideOffset={4} className="z-[9999]">
-          {children}
+          <div className="text-caption font-caption text-black">
+            {children}
+          </div>
         </Tooltip.Content>
       </Tooltip.Root>
     </Tooltip.Provider>
