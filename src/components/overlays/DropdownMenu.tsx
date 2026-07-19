@@ -71,42 +71,42 @@ const DropdownItem = React.forwardRef<HTMLDivElement, DropdownItemProps>(functio
   { icon = <Star />, hint, showHint = false, label, to, className, ...otherProps },
   ref,
 ) {
-    const { resolvedTheme } = useTheme();
-    const isDarkTheme = resolvedTheme === "dark";
+  const { resolvedTheme } = useTheme();
+  const isDarkTheme = resolvedTheme === "dark";
 
-    const content = (
-      <div className={cn("group/adcae8d6 flex w-full cursor-pointer items-center gap-2 outline-none", className)} ref={ref}>
-        <div className="flex grow shrink-0 basis-0 flex-col items-start gap-1">
-          <div
-            className={cn(
-              "flex h-8 w-full flex-none items-center gap-2 rounded-md px-3",
-              "group-active/adcae8d6:bg-neutral-50",
-              isDarkTheme
-                ? "group-hover/adcae8d6:bg-neutral-100 group-focus/adcae8d6:bg-neutral-100 group-data-[highlighted]/adcae8d6:bg-neutral-100"
-                : "group-hover/adcae8d6:bg-brand-primary group-focus/adcae8d6:bg-brand-primary group-data-[highlighted]/adcae8d6:bg-brand-primary",
-              { "pr-1": showHint },
-            )}
-          >
-            {icon ? <IconWrapper className="text-body font-body text-default-font">{icon}</IconWrapper> : null}
-            {label ? (
-              <span className="line-clamp-1 grow shrink-0 basis-0 text-body font-body text-default-font group-hover/adcae8d6:text-default-font">
-                {label}
-              </span>
-            ) : null}
-            <div className="flex items-center gap-2 pl-1">
-              <DropdownMenu.HintBadge className={cn("hidden", { flex: showHint })} text={hint} />
-            </div>
+  const content = (
+    <div className={cn("group/adcae8d6 flex w-full cursor-pointer items-center gap-2 outline-none", className)} ref={ref}>
+      <div className="flex grow shrink-0 basis-0 flex-col items-start gap-1">
+        <div
+          className={cn(
+            "flex h-8 w-full flex-none items-center gap-2 rounded-md px-3",
+            "group-active/adcae8d6:bg-neutral-50",
+            isDarkTheme
+              ? "group-hover/adcae8d6:bg-neutral-100 group-focus/adcae8d6:bg-neutral-100 group-data-[highlighted]/adcae8d6:bg-neutral-100"
+              : "group-hover/adcae8d6:bg-brand-primary group-focus/adcae8d6:bg-brand-primary group-data-[highlighted]/adcae8d6:bg-brand-primary",
+            { "pr-1": showHint },
+          )}
+        >
+          {icon ? <IconWrapper className="text-body font-body text-default-font">{icon}</IconWrapper> : null}
+          {label ? (
+            <span className="line-clamp-1 grow shrink-0 basis-0 text-body font-body text-default-font group-hover/adcae8d6:text-default-font">
+              {label}
+            </span>
+          ) : null}
+          <div className="flex items-center gap-2 pl-1">
+            <DropdownMenu.HintBadge className={cn("hidden", { flex: showHint })} text={hint} />
           </div>
         </div>
       </div>
-    );
+    </div>
+  );
 
-    return (
-      <RadixDropdownMenu.Item asChild {...otherProps}>
-        {to ? <Link to={to}>{content}</Link> : content}
-      </RadixDropdownMenu.Item>
-    );
-  },
+  return (
+    <RadixDropdownMenu.Item asChild {...otherProps}>
+      {to ? <Link to={to}>{content}</Link> : content}
+    </RadixDropdownMenu.Item>
+  );
+},
 );
 
 interface DropdownDividerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -133,27 +133,27 @@ const HintBadge = React.forwardRef<HTMLDivElement, HintBadgeProps>(function Hint
   { text, className, ...otherProps },
   ref,
 ) {
-    const { resolvedTheme } = useTheme();
-    const isDarkTheme = resolvedTheme === "dark";
+  const { resolvedTheme } = useTheme();
+  const isDarkTheme = resolvedTheme === "dark";
 
-    return (
-      <div
-        className={cn(
-          "flex flex-col items-start gap-4 rounded-md px-1 py-1",
-          isDarkTheme ? "bg-neutral-100" : "bg-neutral-800",
-          className,
-        )}
-        ref={ref}
-        {...otherProps}
-      >
-        {text ? (
-          <span className="font-['Kode_Mono'] text-[13px] font-[400] leading-[16px] text-accent-1-primary">
-            {text}
-          </span>
-        ) : null}
-      </div>
-    );
-  },
+  return (
+    <div
+      className={cn(
+        "flex flex-col items-start gap-4 rounded-md px-1 py-1",
+        isDarkTheme ? "bg-neutral-100" : "bg-neutral-800",
+        className,
+      )}
+      ref={ref}
+      {...otherProps}
+    >
+      {text ? (
+        <span className="font-['Kode_Mono'] text-[13px] font-[400] leading-[16px] text-accent-1-primary">
+          {text}
+        </span>
+      ) : null}
+    </div>
+  );
+},
 );
 
 interface DropdownMenuRootProps extends React.HTMLAttributes<HTMLDivElement> {
