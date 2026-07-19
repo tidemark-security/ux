@@ -1,4 +1,5 @@
 export { AssigneeSelector } from "./AssigneeSelector";
+export type { AssigneeSelectorProps, AssigneeOption } from "./AssigneeSelector";
 export { Calendar } from "./Calendar";
 export type { CalendarProps } from "./Calendar";
 export { Checkbox } from "./Checkbox";

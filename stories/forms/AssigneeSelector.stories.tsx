@@ -62,3 +62,27 @@ export const FilterMode: Story = {
     );
   },
 };
+
+export const FilterModeToolbar: Story = {
+  render: () => {
+    const [selectedAssignees, setSelectedAssignees] = useState<string[] | null>(["alex"]);
+
+    return (
+      <div className="flex w-[420px] flex-col gap-3 rounded-md border border-neutral-border bg-default-background p-4">
+        <div className="w-40 overflow-hidden rounded-md bg-[color-mix(in_srgb,rgb(var(--color-neutral-100))_88%,black)]">
+          <AssigneeSelector
+            presentation="toolbar"
+            mode="filter"
+            selectedAssignees={selectedAssignees}
+            currentUser="riley"
+            users={users}
+            onSelectionChange={setSelectedAssignees}
+          />
+        </div>
+        <pre className="rounded-md border border-neutral-border bg-neutral-50 p-3 text-caption font-caption text-default-font">
+          {JSON.stringify({ selectedAssignees }, null, 2)}
+        </pre>
+      </div>
+    );
+  },
+};

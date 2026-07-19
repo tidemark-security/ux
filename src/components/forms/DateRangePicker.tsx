@@ -6,6 +6,7 @@ import { Calendar, ChevronDown } from "lucide-react";
 import { Accordion } from "../overlays/Accordion";
 import { Button } from "../actions/Button";
 import { DropdownMenu } from "../overlays/DropdownMenu";
+import { ToolbarButton } from "../navigation/ToolbarButton";
 import { TextField } from "./TextField";
 import { useTheme } from "../../contexts/ThemeContext";
 import {
@@ -33,6 +34,10 @@ export interface DateRangePickerProps {
   size?: "small" | "medium";
   className?: string;
   variant?: "neutral-secondary" | "neutral-tertiary";
+  /** Trigger presentation: default Button, or a Toolbar filter button. */
+  presentation?: "button" | "toolbar";
+  /** Label shown on the top line of the toolbar trigger (presentation="toolbar"). */
+  toolbarLabel?: string;
 }
 
 export function DateRangePicker({
@@ -43,6 +48,8 @@ export function DateRangePicker({
   size = "small",
   className,
   variant = "neutral-secondary",
+  presentation = "button",
+  toolbarLabel = "Time",
 }: DateRangePickerProps) {
   const { resolvedTheme } = useTheme();
   const isDarkTheme = resolvedTheme === "dark";
@@ -147,6 +154,16 @@ export function DateRangePicker({
     return "Custom range";
   }, [showAllTime, value]);
 
+  const toolbarValue = React.useMemo(() => {
+    if (!value) {
+      return showAllTime ? "All time" : "Select dates";
+    }
+    if (value.preset && value.preset !== "custom") {
+      return getRelativeTimeLabel(value.preset);
+    }
+    return "Custom";
+  }, [showAllTime, value]);
+
   const presetRowClass = cn(
     "flex w-full cursor-pointer items-center gap-2 px-3 py-2",
     "bg-neutral-50",
@@ -156,9 +173,21 @@ export function DateRangePicker({
   return (
     <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenu.Trigger asChild>
-        <Button className={className} variant={variant} size={size} icon={<Calendar />} iconRight={<ChevronDown />}>
-          {displayLabel}
-        </Button>
+        {presentation === "toolbar" ? (
+          <ToolbarButton
+            className={className}
+            icon={<Calendar />}
+            label={toolbarLabel}
+            value={toolbarValue}
+            chevron
+            active={!!value}
+            title={value?.preset === "custom" ? displayLabel : undefined}
+          />
+        ) : (
+          <Button className={className} variant={variant} size={size} icon={<Calendar />} iconRight={<ChevronDown />}>
+            {displayLabel}
+          </Button>
+        )}
       </DropdownMenu.Trigger>
       <DropdownMenu.Content className="w-[320px] items-stretch p-0" side="bottom" align="start" sideOffset={4}>
         <Accordion

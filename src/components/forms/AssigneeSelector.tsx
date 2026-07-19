@@ -6,6 +6,7 @@ import { CheckSquare, ChevronDown, Search, Square, User, UserPlus, UserX } from 
 import { Button } from "../actions/Button";
 import { TextField } from "./TextField";
 import { DropdownMenu } from "../overlays/DropdownMenu";
+import { ToolbarButton } from "../navigation/ToolbarButton";
 
 export interface AssigneeOption {
   userId: string | number;
@@ -22,6 +23,12 @@ export interface AssigneeSelectorProps {
   isLoadingUsers?: boolean;
   disabled?: boolean;
   size?: "small" | "medium";
+  /** Trigger presentation: default Button, or a Toolbar filter button. */
+  presentation?: "button" | "toolbar";
+  /** Label shown on the top line of the toolbar trigger (presentation="toolbar"). */
+  toolbarLabel?: string;
+  /** Label used in assign mode when there is no current assignee. */
+  unassignedLabel?: string;
   onUnassign?: () => void;
   onAssignToMe?: () => void;
   onAssignToUser?: (username: string) => void;
@@ -40,6 +47,9 @@ export function AssigneeSelector({
   isLoadingUsers = false,
   disabled = false,
   size = "small",
+  presentation = "button",
+  toolbarLabel = "Assignee",
+  unassignedLabel = "Unassigned",
   onUnassign,
   onAssignToMe,
   onAssignToUser,
@@ -75,7 +85,7 @@ export function AssigneeSelector({
     if (disabled) return "Updating...";
 
     if (mode === "assign") {
-      return currentAssignee ? `${currentAssignee}${isAssignedToCurrentUser ? " (You)" : ""}` : "Unassigned";
+      return currentAssignee ? `${currentAssignee}${isAssignedToCurrentUser ? " (You)" : ""}` : unassignedLabel;
     }
 
     if (selected.length === 0) return "Assignee";
@@ -88,10 +98,29 @@ export function AssigneeSelector({
       return selected.map((value) => (value === "__unassigned__" ? "Unassigned" : value)).join(", ");
     }
     return `${selected.length} assignees`;
-  }, [currentAssignee, disabled, isAssignedToCurrentUser, mode, selected, users]);
+  }, [currentAssignee, disabled, isAssignedToCurrentUser, mode, selected, unassignedLabel, users]);
 
-  const handleToggle = (username: string) => {
+  const toolbarValue = useMemo(() => {
+    if (mode === "assign") {
+      return currentAssignee ? `${currentAssignee}${isAssignedToCurrentUser ? " (You)" : ""}` : unassignedLabel;
+    }
+
+    if (selected.length === 0) return "Any";
+    if (selected.length === 1) {
+      if (selected[0] === "__unassigned__") return "Unassigned";
+      const user = users.find((item) => item.username === selected[0]);
+      return user ? user.username : selected[0];
+    }
+    return `${selected.length} assignees`;
+  }, [currentAssignee, isAssignedToCurrentUser, mode, selected, unassignedLabel, users]);
+
+  const isActive = mode === "filter" ? selected.length > 0 : !!currentAssignee;
+
+  const handleToggle = (rawUsername: string) => {
     if (mode !== "filter" || !onSelectionChange) return;
+
+    const username = rawUsername === "__me__" ? currentUser : rawUsername;
+    if (!username) return;
 
     const nextSelection = selected.includes(username)
       ? selected.filter((value) => value !== username)
@@ -131,16 +160,28 @@ export function AssigneeSelector({
   return (
     <DropdownMenu.Root modal={false} open={dropdownOpen} onOpenChange={handleOpenChange}>
       <DropdownMenu.Trigger asChild>
-        <Button
-          className={className || (size === "medium" ? "h-auto w-auto flex-none self-stretch" : "h-8 w-auto")}
-          variant="neutral-secondary"
-          size={size}
-          icon={<User />}
-          iconRight={<ChevronDown />}
-          disabled={disabled}
-        >
-          {buttonLabel}
-        </Button>
+        {presentation === "toolbar" ? (
+          <ToolbarButton
+            className={className}
+            icon={<User />}
+            label={toolbarLabel}
+            value={toolbarValue}
+            chevron
+            active={isActive}
+            disabled={disabled}
+          />
+        ) : (
+          <Button
+            className={className || (size === "medium" ? "h-auto w-auto flex-none self-stretch" : "h-8 w-auto")}
+            variant="neutral-secondary"
+            size={size}
+            icon={<User />}
+            iconRight={<ChevronDown />}
+            disabled={disabled}
+          >
+            {buttonLabel}
+          </Button>
+        )}
       </DropdownMenu.Trigger>
       <DropdownMenu.Content side="bottom" align="start" sideOffset={4} className={`max-h-[400px] overflow-y-auto ${dropdownClassName || ""}`}>
         {users.length > 0 ? (
@@ -173,6 +214,15 @@ export function AssigneeSelector({
           </>
         ) : (
           <>
+            {currentUser ? (
+              <DropdownMenu.DropdownItem
+                icon={selected.includes(currentUser) ? <CheckSquare /> : <Square />}
+                hint="Current user"
+                label="Assigned to me"
+                onClick={() => handleToggle("__me__")}
+                onSelect={(event) => event.preventDefault()}
+              />
+            ) : null}
             <DropdownMenu.DropdownItem
               icon={selected.includes("__unassigned__") ? <CheckSquare /> : <Square />}
               hint="Items with no assignee"

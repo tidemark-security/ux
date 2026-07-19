@@ -5,3 +5,7 @@ export { SidebarRailWithLabels } from "./SidebarRailWithLabels";
 export { SidebarWithSections } from "./SidebarWithSections";
 export { Stepper } from "./Stepper";
 export type { StepperProps, StepProps } from "./Stepper";
+export { Toolbar } from "./Toolbar";
+export type { ToolbarProps } from "./Toolbar";
+export { ToolbarButton } from "./ToolbarButton";
+export type { ToolbarButtonProps } from "./ToolbarButton";
