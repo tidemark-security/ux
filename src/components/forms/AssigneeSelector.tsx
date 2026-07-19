@@ -29,6 +29,8 @@ export interface AssigneeSelectorProps {
   toolbarLabel?: string;
   /** Label used in assign mode when there is no current assignee. */
   unassignedLabel?: string;
+  /** Show each user's email as a hint badge in the dropdown. Defaults to false. */
+  showEmails?: boolean;
   onUnassign?: () => void;
   onAssignToMe?: () => void;
   onAssignToUser?: (username: string) => void;
@@ -50,6 +52,7 @@ export function AssigneeSelector({
   presentation = "button",
   toolbarLabel = "Assignee",
   unassignedLabel = "Unassigned",
+  showEmails = false,
   onUnassign,
   onAssignToMe,
   onAssignToUser,
@@ -252,10 +255,18 @@ export function AssigneeSelector({
                       ? "Current"
                       : user.username === currentUser
                         ? "You"
-                        : user.email || undefined
-                    : user.email || undefined
+                        : showEmails
+                          ? user.email || undefined
+                          : undefined
+                    : showEmails
+                      ? user.email || undefined
+                      : undefined
                 }
-                showHint={!!(mode === "assign" ? isCurrent || user.username === currentUser || user.email : user.email)}
+                showHint={
+                  mode === "assign"
+                    ? isCurrent || user.username === currentUser || (showEmails && !!user.email)
+                    : showEmails && !!user.email
+                }
                 onClick={() => (mode === "filter" ? handleToggle(user.username) : handleAssign(user.username))}
                 onSelect={(event) => {
                   if (mode === "filter") {

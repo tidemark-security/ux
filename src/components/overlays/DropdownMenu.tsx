@@ -84,7 +84,7 @@ const DropdownItem = React.forwardRef<HTMLDivElement, DropdownItemProps>(functio
               isDarkTheme
                 ? "group-hover/adcae8d6:bg-neutral-100 group-focus/adcae8d6:bg-neutral-100 group-data-[highlighted]/adcae8d6:bg-neutral-100"
                 : "group-hover/adcae8d6:bg-brand-primary group-focus/adcae8d6:bg-brand-primary group-data-[highlighted]/adcae8d6:bg-brand-primary",
-              { "flex-row flex-nowrap gap-4 pl-3 pr-1 py-0": showHint },
+              { "pr-1": showHint },
             )}
           >
             {icon ? <IconWrapper className="text-body font-body text-default-font">{icon}</IconWrapper> : null}

@@ -86,3 +86,25 @@ export const FilterModeToolbar: Story = {
     );
   },
 };
+
+export const FilterModeWithEmails: Story = {
+  render: () => {
+    const [selectedAssignees, setSelectedAssignees] = useState<string[] | null>(["alex"]);
+
+    return (
+      <div className="flex w-[420px] flex-col gap-3 rounded-md border border-neutral-border bg-default-background p-4">
+        <AssigneeSelector
+          mode="filter"
+          showEmails
+          selectedAssignees={selectedAssignees}
+          currentUser="riley"
+          users={users}
+          onSelectionChange={setSelectedAssignees}
+        />
+        <pre className="rounded-md border border-neutral-border bg-neutral-50 p-3 text-caption font-caption text-default-font">
+          {JSON.stringify({ selectedAssignees }, null, 2)}
+        </pre>
+      </div>
+    );
+  },
+};
